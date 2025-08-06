@@ -54,12 +54,4 @@ public class GestorDeArchivos {
     public void setVelocidadDeProcesamiento(int velocidadDeProcesamiento) {
         this.velocidadDeProcesamiento = velocidadDeProcesamiento;
     }
-    
-    
-    
-    
-
-
-    
-    
 }

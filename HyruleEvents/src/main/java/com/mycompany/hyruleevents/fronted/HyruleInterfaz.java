@@ -4,11 +4,10 @@
  */
 package com.mycompany.hyruleevents.fronted;
 
+import com.mycompany.hyruleevents.backend.EjecutadorDeInstrucciones;
 import com.mycompany.hyruleevents.backend.GestorDeArchivos;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.io.File;
 import javax.swing.JPanel;
 
 /**
@@ -42,10 +41,20 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         this.gestorDeArchivos = new GestorDeArchivos();
     }
     
-    public void mostrarFileChooser(){
+    public void mostrarCargadorDeArchivPanel(){
         limpiarFrame();
-        CargaDeArchivoPanel cargaDeArchivo = new CargaDeArchivoPanel(gestorDeArchivos);
+        CargaDeArchivoPanel cargaDeArchivo = new CargaDeArchivoPanel(this);
         añadirPanel(cargaDeArchivo);
+    }
+    
+    
+    public void ejecutarArchivoDeTexto(){
+        
+        File archivo = gestorDeArchivos.getArchivoDeTexto();
+        int velocidad = gestorDeArchivos.getVelocidadDeProcesamiento();
+        EjecutadorDeInstrucciones ejecutador = new EjecutadorDeInstrucciones(archivo,velocidad);
+        Thread hilo = new Thread(ejecutador);
+        hilo.start();
     }
     
     private void limpiarFrame(){
@@ -63,6 +72,12 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         repaint();
         this.panelActual = panel;
     }
+
+    public GestorDeArchivos getGestorDeArchivos() {
+        return gestorDeArchivos;
+    }
+    
+    
 
 
     @SuppressWarnings("unchecked")

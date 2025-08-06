@@ -4,6 +4,7 @@
  */
 package com.mycompany.hyruleevents.fronted;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -128,8 +129,9 @@ public class LoginPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.ventanaPrincipal.mostrarFileChooser();
+        this.ventanaPrincipal.mostrarCargadorDeArchivPanel();
         System.out.println("ejecutado exitosamente");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

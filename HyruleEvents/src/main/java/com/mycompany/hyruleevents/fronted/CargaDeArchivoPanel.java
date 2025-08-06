@@ -20,10 +20,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class CargaDeArchivoPanel extends javax.swing.JPanel {
 
     private GestorDeArchivos gestorDeArchivos;
+    private HyruleInterfaz ventanaPrincipal;
 
-    public CargaDeArchivoPanel(GestorDeArchivos gestorDeArchivos) {
+    public CargaDeArchivoPanel(HyruleInterfaz ventanaPrincipal) {
         initComponents();
-        this.gestorDeArchivos = gestorDeArchivos;
+        this.ventanaPrincipal = ventanaPrincipal;
+        this.gestorDeArchivos = ventanaPrincipal.getGestorDeArchivos();
         this.setPreferredSize(new Dimension(1000,600));
     }
 
@@ -155,6 +157,9 @@ public class CargaDeArchivoPanel extends javax.swing.JPanel {
             int velocidad = Integer.valueOf(this.VelocidadTf.getText());
             gestorDeArchivos.setVelocidadDeProcesamiento(velocidad);
             System.out.println("todo está bien, siguente");
+            
+            // si todo está bien;
+            this.ventanaPrincipal.ejecutarArchivoDeTexto();
 
         } catch (ArchivoNullException e) {
             JOptionPane.showMessageDialog(this, "Elija el archivo de entrada");
