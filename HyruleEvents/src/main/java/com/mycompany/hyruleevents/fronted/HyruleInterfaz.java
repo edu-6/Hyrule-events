@@ -8,6 +8,7 @@ import com.mycompany.hyruleevents.backend.GestorDeArchivos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 /**
@@ -30,7 +31,8 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     public HyruleInterfaz() {
         initComponents();
         //Frontend
-        this.setLayout(new FlowLayout());
+        this.setLocationRelativeTo(null);
+        this.fondoPanel.setLayout(new GridLayout());
         this.loginPanel = new LoginPanel(this);
         this.panelActual = loginPanel;
         //this.add(loginPanel, BorderLayout.CENTER);
@@ -47,13 +49,15 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     }
     
     private void limpiarFrame(){
-        this.remove(panelActual);   
-        this.repaint();
+        fondoPanel.remove(panelActual);   
+        fondoPanel.repaint();
     }
     
     private void añadirPanel(JPanel panel){
         limpiarFrame();
-        this.add(panel);
+        fondoPanel.add(panel);
+        fondoPanel.revalidate();
+        fondoPanel.repaint();
         this.pack();
         revalidate();
         repaint();
@@ -65,17 +69,30 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fondoPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout fondoPanelLayout = new javax.swing.GroupLayout(fondoPanel);
+        fondoPanel.setLayout(fondoPanelLayout);
+        fondoPanelLayout.setHorizontalGroup(
+            fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 443, Short.MAX_VALUE)
+        );
+        fondoPanelLayout.setVerticalGroup(
+            fondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 406, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(fondoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(fondoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -83,5 +100,6 @@ public class HyruleInterfaz extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel fondoPanel;
     // End of variables declaration//GEN-END:variables
 }

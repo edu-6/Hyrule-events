@@ -7,6 +7,7 @@ package com.mycompany.hyruleevents.fronted;
 import com.mycompany.hyruleevents.backend.ArchivoNullException;
 import com.mycompany.hyruleevents.backend.CarpetaSalidaNullException;
 import com.mycompany.hyruleevents.backend.GestorDeArchivos;
+import java.awt.Dimension;
 import javax.swing.JFileChooser;
 import static javax.swing.JFileChooser.DIRECTORIES_ONLY;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ public class CargaDeArchivoPanel extends javax.swing.JPanel {
     public CargaDeArchivoPanel(GestorDeArchivos gestorDeArchivos) {
         initComponents();
         this.gestorDeArchivos = gestorDeArchivos;
+        this.setPreferredSize(new Dimension(1000,600));
     }
 
     /**
@@ -35,86 +37,113 @@ public class CargaDeArchivoPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel2 = new javax.swing.JLabel();
-        SiguenteBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         ElegirSalidaBtn = new javax.swing.JButton();
         CargarBtn = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        SiguenteBtn = new javax.swing.JButton();
         VelocidadTf = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
-        jLabel2.setText("Velocidad de procesamiento (en ms):");
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
 
-        SiguenteBtn.setText("Siguente");
-        SiguenteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SiguenteBtnActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
+        ElegirSalidaBtn.setBackground(new java.awt.Color(204, 204, 204));
         ElegirSalidaBtn.setText("Elegir salida");
+        ElegirSalidaBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ElegirSalidaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ElegirSalidaBtnActionPerformed(evt);
             }
         });
 
+        CargarBtn.setBackground(new java.awt.Color(204, 204, 204));
         CargarBtn.setText("Cargar Archivo");
+        CargarBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         CargarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CargarBtnActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel3.setText("A continuación cargue el archivo de texto y elija el path de salida");
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        jLabel1.setText("A continuación cargue el archivo de texto y elija el path de salida");
+
+        SiguenteBtn.setBackground(new java.awt.Color(204, 204, 204));
+        SiguenteBtn.setText("Siguente");
+        SiguenteBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        SiguenteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SiguenteBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        jLabel2.setText("Velocidad de procesamiento (en ms):");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(CargarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(295, 295, 295)
+                        .addComponent(ElegirSalidaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(VelocidadTf, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SiguenteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ElegirSalidaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CargarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(VelocidadTf, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
+                .addComponent(SiguenteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
-                        .addComponent(SiguenteBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(VelocidadTf))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(CargarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(ElegirSalidaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(38, Short.MAX_VALUE)
+                    .addContainerGap(816, Short.MAX_VALUE)
                     .addComponent(jLabel3)
                     .addGap(9, 9, 9)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CargarBtn)
-                    .addComponent(ElegirSalidaBtn))
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(VelocidadTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(SiguenteBtn)
-                .addGap(40, 40, 40))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(239, Short.MAX_VALUE)))
+                    .addContainerGap(370, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,11 +157,11 @@ public class CargaDeArchivoPanel extends javax.swing.JPanel {
             System.out.println("todo está bien, siguente");
 
         } catch (ArchivoNullException e) {
-            JOptionPane.showMessageDialog(CargarBtn, "Elija el archivo de entrada");
+            JOptionPane.showMessageDialog(this, "Elija el archivo de entrada");
         } catch (CarpetaSalidaNullException e) {
-            JOptionPane.showMessageDialog(CargarBtn, "Elija el directorio de salida");
+            JOptionPane.showMessageDialog(this, "Elija el directorio de salida");
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(CargarBtn, "La velocidad debe ser un numero entero (ms)");
+            JOptionPane.showMessageDialog(this, "La velocidad debe ser un numero entero (ms)");
         }
 
     }//GEN-LAST:event_SiguenteBtnActionPerformed
@@ -166,8 +195,10 @@ public class CargaDeArchivoPanel extends javax.swing.JPanel {
     private javax.swing.JButton ElegirSalidaBtn;
     private javax.swing.JButton SiguenteBtn;
     private javax.swing.JTextField VelocidadTf;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 }
