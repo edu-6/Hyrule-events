@@ -70,9 +70,11 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 break;
             case "VALIDAR_INSCRIPCION":
                 System.out.println("Es validación de inscripcion");
+                break;
+                
             case "REGISTRO_ACTIVIDAD":
                 System.out.println("Es registro de actividad");
-
+                break;
             case "ASISTENCIA":
                 System.out.println("Es registro de asistencia");
                 break;
