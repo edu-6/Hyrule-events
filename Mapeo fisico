@@ -69,8 +69,3 @@ CREATE TABLE asistencia (
     CONSTRAINT fk_codigo_actividad FOREIGN KEY (codigo_actividad) REFERENCES actividad (codigo)
 );
 
-
-
-
-
-
