@@ -1,0 +1,20 @@
+git stash -------------------
+para revertir los cambios locales, pero guardandolos para luego restaurarlos
+Entonces, git stash (revierto cambios temporalmente) luego git pull (recibo cambios)
+veo los cambios y luego aplico los mios (localmente)
+usando "git stash pop"  o "git stash apply"
+la diferencia entre los dos es que git stash pop saca los cambios de la pila y los borra de la pila
+mientras que git stash apply solo aplica los cambios sin borrar de la pila
+
+Git stash funciona como una pila
+
+git diff???
+
+git checkout otra-rama
+Subir cambios desde una rama:
+git add, gitcommit, luego git pull origin nombre-de-la-rama
+
+Aplicar cambios de rama a la rama main:
+hacer el merge desde gituhb: pull request, merge request, luego git pull (para obtener los cambios desde github), luego eliminar rama en github con el comando:
+
+git branch -d rama-a-eliminar
