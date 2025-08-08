@@ -35,7 +35,6 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 Thread.sleep(velocidad);
                 linea = buffer.readLine();
             }
-            
             System.out.println("Terminado exitosamente");
             
         } catch (IOException e) {
@@ -43,7 +42,6 @@ public class EjecutadorDeInstrucciones implements Runnable {
         } catch (Exception e) {
 
         }
-
     }
 
     private void ejecutarInstruccion(String linea) {

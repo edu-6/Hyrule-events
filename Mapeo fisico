@@ -2,9 +2,9 @@ CREATE USER 'adminhr'@'localhost' IDENTIFIED BY '12345';
 GRANT ALL ON *.* TO 'adminhr'@'localhost';
 FLUSH PRIVILEGES;
 
-CREATE DATABASE hr_eventos_db
+CREATE DATABASE hr_db
 
-USE hr_eventos_db
+USE hr_db
 
 CREATE TABLE participante (
     nombre VARCHAR(44) NOT NULL,
