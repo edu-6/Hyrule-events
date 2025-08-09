@@ -43,7 +43,13 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         this.gestorDeArchivos = new GestorDeArchivos();
     }
     
+    public void crearTablas(){
+        CreadorDeTablas creador = new CreadorDeTablas();
+        creador.crearTablas(dbConexion.getConnection());
+    }
+    
     public void mostrarCargadorDeArchivPanel(){
+        crearTablas();
         limpiarFrame();
         CargaDeArchivoPanel cargaDeArchivo = new CargaDeArchivoPanel(this);
         añadirPanel(cargaDeArchivo);
