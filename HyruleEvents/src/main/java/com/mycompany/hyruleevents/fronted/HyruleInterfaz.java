@@ -4,6 +4,7 @@
  */
 package com.mycompany.hyruleevents.fronted;
 
+import com.mycompany.hyruleevents.backend.CreadorDeTablas;
 import com.mycompany.hyruleevents.backend.DBConnection;
 import com.mycompany.hyruleevents.backend.EjecutadorDeInstrucciones;
 import com.mycompany.hyruleevents.backend.GestorDeArchivos;
@@ -24,7 +25,7 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     
     //Backend
     private GestorDeArchivos gestorDeArchivos;
-    private DBConnection conexion;
+    private DBConnection dbConexion;
     
     /**
      * Creates new form HyruleInterfaz
@@ -40,7 +41,6 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         
         //Backend
         this.gestorDeArchivos = new GestorDeArchivos();
-        
     }
     
     public void mostrarCargadorDeArchivPanel(){
@@ -79,7 +79,7 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         return gestorDeArchivos;
     }
      public void setConexion(DBConnection conexion) {
-        this.conexion = conexion;
+        this.dbConexion = conexion;
     }
 
     @SuppressWarnings("unchecked")
