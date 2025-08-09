@@ -36,4 +36,10 @@ public class DBConnection {
         System.out.println("Esquema: " + connection.getSchema());
         System.out.println("Catalogo: " + connection.getCatalog());
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+    
+    
 }
