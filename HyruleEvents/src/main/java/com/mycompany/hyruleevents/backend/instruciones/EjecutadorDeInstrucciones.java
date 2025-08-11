@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.hyruleevents.backend;
+package com.mycompany.hyruleevents.backend.instruciones;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,6 +35,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 Thread.sleep(velocidad);
                 linea = buffer.readLine();
             }
+            
             System.out.println("Terminado exitosamente");
             
         } catch (IOException e) {
@@ -42,6 +43,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
         } catch (Exception e) {
 
         }
+
     }
 
     private void ejecutarInstruccion(String linea) {
