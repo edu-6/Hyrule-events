@@ -21,6 +21,7 @@ public abstract class ValidadorDeInstruccion {
     protected Dependencia[] tipoDeDependencia; //indica si un parametro es obligatorio o no 
     protected String nombreDeInstruccion;
     protected ValidadorDeFecha validadorFecha;
+    
 
     public ValidadorDeInstruccion(int primerCaracterRelevante, int cantidadDeParametros, String nombreDeInstruccion) {
 
@@ -44,6 +45,11 @@ public abstract class ValidadorDeInstruccion {
 
     protected abstract void inicializarTiposDeParametro();
 
+    /**
+     * Verifica parametros como tipo de participante,evento etc
+     * @param parametros
+     * @return 
+     */
     protected abstract boolean parametrosEspecialesValidos(String[] parametros);
 
     public String [] verificarInstruccion(String instruccion) {
@@ -63,7 +69,8 @@ public abstract class ValidadorDeInstruccion {
         parametros = separarParametros(instruccion);
 
         if (!sintaxisDeParametrosValida(parametros)) {
-            logs = ">>> Parametros mal introducidos\n" + " Todos los datos llevan comillas, exepto los numericos";
+            logs = ">>> Parametros mal introducidos\n" + " Todos los datos llevan comillas, exepto los numericos"
+                    + "(sin comillas y mayores a 0)";
             return null;
         }
 

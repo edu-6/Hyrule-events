@@ -4,7 +4,6 @@
  */
 package com.mycompany.hyruleevents.backend.instruciones.validadores;
 
-import com.mycompany.hyruleevents.backend.instruciones.Instruccion;
 import com.mycompany.hyruleevents.backend.instruciones.ValidadorDeInstruccion;
 import com.mycompany.hyruleevents.backend.instruciones.enums.Dependencia;
 import com.mycompany.hyruleevents.backend.instruciones.enums.Evento;
@@ -17,13 +16,12 @@ import com.mycompany.hyruleevents.backend.instruciones.enums.Parametro;
 public class RegistroDeEventoValidador extends ValidadorDeInstruccion {
 
     private static final int INDICE_TIPO_EVENTO = 2;
+    private static final int INDICE_FECHA = 1;
     private Evento eventoEnun;
 
     public RegistroDeEventoValidador() {
         super(17, 6, "REGISTRO_EVENTO");
     }
-
-    
 
     @Override
     protected void inicializarTiposDeParametro() {
@@ -38,11 +36,13 @@ public class RegistroDeEventoValidador extends ValidadorDeInstruccion {
     protected void indicarParametrosObligatorios() {
         Dependencia[] tipoDeDependencia = {Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO,
             Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO};
+
+        this.tipoDeDependencia = tipoDeDependencia;
     }
 
     @Override
     protected boolean parametrosEspecialesValidos(String[] parametros) {
-        String fecha = this.validadorFecha.fechaValida(parametros[2]);
+        String fecha = this.validadorFecha.fechaValida(parametros[INDICE_FECHA]);
         if (fecha == null) {
             logs = ">>> El formato de fecha debe estar en dd/mm/aa";
             return false;
@@ -51,18 +51,17 @@ public class RegistroDeEventoValidador extends ValidadorDeInstruccion {
         boolean valorEncontrado = false;
         for (Evento e : Evento.values()) {
             if (e.getTipo().equals(parametros[this.INDICE_TIPO_EVENTO])) {
-                valorEncontrado= true;
+                valorEncontrado = true;
                 break;
             }
         }
-        
-        if(valorEncontrado){
+
+        if (valorEncontrado) {
             return true;
-        }else{
-            logs=">>> "+ parametros[2]+" no es un tipo de evento";
+        } else {
+            logs = ">>> " + parametros[INDICE_TIPO_EVENTO] + " no es un tipo de evento";
             return false;
         }
     }
-    
-    
+
 }
