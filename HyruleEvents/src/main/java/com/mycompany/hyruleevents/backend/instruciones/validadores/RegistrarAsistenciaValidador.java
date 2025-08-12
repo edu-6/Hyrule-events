@@ -14,7 +14,7 @@ import com.mycompany.hyruleevents.backend.instruciones.enums.Parametro;
  */
 public class RegistrarAsistenciaValidador extends ValidadorDeInstruccion{
 
-    public RegistrarAsistenciaValidador(int primerCaracterRelevante, int cantidadDeParametros, String nombreDeInstruccion) {
+    public RegistrarAsistenciaValidador() {
         super(11, 2, "ASISTENCIA");
     }
 

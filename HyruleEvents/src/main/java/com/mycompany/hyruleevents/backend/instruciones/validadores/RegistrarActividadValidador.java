@@ -16,7 +16,7 @@ import com.mycompany.hyruleevents.backend.instruciones.enums.Parametro;
 public class RegistrarActividadValidador extends ValidadorDeInstruccion {
 
     private static final int INDICE_TIPO_ACTIVIDAD = 2;
-    public RegistrarActividadValidador(int primerCaracterRelevante, int cantidadDeParametros, String nombreDeInstruccion) {
+    public RegistrarActividadValidador() {
         super(19, 8, "REGISTRO_ACTIVIDAD");
     }
 

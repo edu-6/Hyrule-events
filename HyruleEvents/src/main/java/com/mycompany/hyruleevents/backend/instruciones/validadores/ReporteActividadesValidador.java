@@ -14,7 +14,7 @@ import com.mycompany.hyruleevents.backend.instruciones.enums.Parametro;
  */
 public class ReporteActividadesValidador extends ValidadorDeInstruccion {
 
-    public ReporteActividadesValidador(int primerCaracterRelevante, int cantidadDeParametros, String nombreDeInstruccion) {
+    public ReporteActividadesValidador() {
         super(20, 3, "REPORTE_ACTIVIDADES");
     }
 

@@ -15,7 +15,7 @@ import com.mycompany.hyruleevents.backend.instruciones.enums.Parametro;
  */
 public class PagoValidador extends ValidadorDeInstruccion {
     private static final int INDICE_TIPO_PAGO = 3;
-    public PagoValidador(int primerCaracterRelevante, int cantidadDeParametros, String nombreDeInstruccion) {
+    public PagoValidador() {
         super(5, 4, "PAGO");
     }
 

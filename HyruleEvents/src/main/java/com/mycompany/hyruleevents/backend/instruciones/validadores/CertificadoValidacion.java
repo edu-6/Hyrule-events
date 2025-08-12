@@ -14,7 +14,7 @@ import com.mycompany.hyruleevents.backend.instruciones.enums.Parametro;
  */
 public class CertificadoValidacion extends ValidadorDeInstruccion {
 
-    public CertificadoValidacion(int primerCaracterRelevante, int cantidadDeParametros, String nombreDeInstruccion) {
+    public CertificadoValidacion() {
         super(12, 2, "CERTIFICADO");
     }
 
