@@ -5,6 +5,8 @@
 package com.mycompany.hyruleevents.fronted;
 
 import com.mycompany.hyruleevents.backend.instruciones.EjecutadorDeInstrucciones;
+import com.mycompany.hyruleevents.backend.CreadorDeTablas;
+import com.mycompany.hyruleevents.backend.DBConnection;
 import com.mycompany.hyruleevents.backend.GestorDeArchivos;
 import java.awt.GridLayout;
 import java.io.File;
@@ -19,11 +21,11 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     private LoginPanel loginPanel;
     private JPanel panelActual;
     
-    
-    
+
     //Backend
-    
     private GestorDeArchivos gestorDeArchivos;
+    private DBConnection dbConexion;
+
     /**
      * Creates new form HyruleInterfaz
      */
@@ -39,9 +41,18 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         
         //Backend
         this.gestorDeArchivos = new GestorDeArchivos();
+
+
+    }
+    
+    public void crearTablas(){
+        CreadorDeTablas creador = new CreadorDeTablas();
+        creador.crearTablas(dbConexion.getConnection());
+
     }
     
     public void mostrarCargadorDeArchivPanel(){
+        crearTablas();
         limpiarFrame();
         CargaDeArchivoPanel cargaDeArchivo = new CargaDeArchivoPanel(this);
         añadirPanel(cargaDeArchivo);
@@ -76,8 +87,9 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     public GestorDeArchivos getGestorDeArchivos() {
         return gestorDeArchivos;
     }
-    
-    
+     public void setConexion(DBConnection conexion) {
+        this.dbConexion = conexion;
+    }
 
 
     @SuppressWarnings("unchecked")
