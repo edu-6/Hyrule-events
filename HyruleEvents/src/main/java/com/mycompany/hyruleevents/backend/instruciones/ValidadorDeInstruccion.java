@@ -67,6 +67,10 @@ public abstract class ValidadorDeInstruccion {
         }
 
         parametros = separarParametros(instruccion);
+        for (int i = 0; i < parametros.length; i++) {
+            System.out.println(parametros[i]);
+            
+        }
 
         if (!sintaxisDeParametrosValida(parametros)) {
             logs = ">>> Parametros mal introducidos\n" + " Todos los datos llevan comillas, exepto los numericos"
@@ -123,14 +127,16 @@ public abstract class ValidadorDeInstruccion {
     }
 
     protected String[] separarParametros(String cadena) {
-        String[] parametros = new String[cantidadDeParametros];
+         String[] parametros = new String[cantidadDeParametros];
         int indice = 0;
+        parametros[0] ="";//limpio para que no se pegue "Null"
         for (int i = primerCaracterRelevante; i < cadena.length() - 2; i++) {
             char caracter = cadena.charAt(i);
             if (caracter != ',') {
                 parametros[indice] += caracter;
             } else {
                 indice++;
+                parametros[indice] = "";
             }
         }
         return parametros;
@@ -214,7 +220,7 @@ public abstract class ValidadorDeInstruccion {
 
     protected boolean sintaxisDeInstruccionCorrecta(String instruccion) {
         int indiceParentesisAbierto = this.primerCaracterRelevante - 1;
-        boolean parentesisCompletos = (instruccion.charAt(indiceParentesisAbierto) == '(' && instruccion.charAt(instruccion.length() - 2) == ',');
+        boolean parentesisCompletos = ( instruccion.charAt(indiceParentesisAbierto) == '(' && instruccion.charAt(instruccion.length() - 2) == ')');
         boolean hayPuntoYComa = instruccion.charAt(instruccion.length() - 1) == ';';
         return parentesisCompletos && hayPuntoYComa;
     }

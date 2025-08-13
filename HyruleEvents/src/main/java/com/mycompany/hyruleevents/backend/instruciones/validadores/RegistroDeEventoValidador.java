@@ -20,7 +20,7 @@ public class RegistroDeEventoValidador extends ValidadorDeInstruccion {
     private Evento eventoEnun;
 
     public RegistroDeEventoValidador() {
-        super(17, 6, "REGISTRO_EVENTO");
+        super(16, 6, "REGISTRO_EVENTO");
     }
 
     @Override
@@ -43,6 +43,7 @@ public class RegistroDeEventoValidador extends ValidadorDeInstruccion {
     @Override
     protected boolean parametrosEspecialesValidos(String[] parametros) {
         String fecha = this.validadorFecha.fechaValida(parametros[INDICE_FECHA]);
+        parametros[INDICE_FECHA] = fecha;
         if (fecha == null) {
             logs = ">>> El formato de fecha debe estar en dd/mm/aa";
             return false;

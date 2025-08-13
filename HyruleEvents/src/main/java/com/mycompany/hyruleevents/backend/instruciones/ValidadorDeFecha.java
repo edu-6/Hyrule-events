@@ -20,16 +20,18 @@ public class ValidadorDeFecha {
         String [] partesFecha = new String [3];
         int indice = 0;
         int cantidadBarras=0;
+        partesFecha[0] = "";
         for (int i = 0; i < cadena.length(); i++) {
             if (cadena.charAt(i) != '/') {
                 partesFecha[indice]+=cadena.charAt(i);
             } else {
                 cantidadBarras++;
                 indice++;
+                partesFecha[indice] = "";
             }
         }
         
-        if(cantidadBarras == 3){
+        if(cantidadBarras == 2){
             return partesFecha[2]+"/"+partesFecha[1]+"/"+partesFecha[0];
         }
         return null;

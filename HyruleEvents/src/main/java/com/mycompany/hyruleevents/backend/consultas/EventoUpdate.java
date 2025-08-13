@@ -41,5 +41,6 @@ public class EventoUpdate extends ConsultaSQL {
         ps.setString(6, cupo);
 
         ps.executeUpdate();
+        ps.close();
     }
 }

@@ -7,6 +7,7 @@ package com.mycompany.hyruleevents.backend.instruciones;
 import com.mycompany.hyruleevents.backend.consultas.ConsultaSQL;
 import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
+import com.mycompany.hyruleevents.fronted.ConsolaDeTexto;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -36,10 +37,14 @@ public class EjecutadorDeInstrucciones implements Runnable {
     private File archivo;
     private int velocidad;
     private Connection connection;
+    
+    private ConsolaDeTexto consola;
 
-    public EjecutadorDeInstrucciones(File archivo, int velocidad) {
+    public EjecutadorDeInstrucciones(File archivo, int velocidad, ConsolaDeTexto consola,Connection connection) {
         this.archivo = archivo;
         this.velocidad = velocidad;
+        this.consola = consola;
+        this.connection = connection;
     }
 
     @Override
@@ -83,8 +88,9 @@ public class EjecutadorDeInstrucciones implements Runnable {
             case REGISTRO_EVENTO:
                 System.out.println("Es un registro de evento");
                 validador = new RegistroDeEventoValidador();
-                parametros = validador.verificarInstruccion(instruccion);
+                parametros = validador.verificarInstruccion(linea); // procesar la linea
                 query = new EventoUpdate(connection);
+                System.out.println("Saliendo del switch");
                 break;
             case REGISTRO_PARTICIPANTE:
                 System.out.println("Es un registro de participante");
@@ -123,11 +129,17 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 break;
         }
 
+        System.out.println("Ahora toca ejecutar archivo");
         if (instruccionReconocida) {
             try {
 
                 if (parametros == null) {
-                    logDeInstruccion = ">>>>> Error en los parametros: " + "\n" + validador.getLogs(); // obtener errores
+                    
+                    if(validador != null){
+                        logDeInstruccion = ">>>>> Error en los parametros: " + "\n" + validador.getLogs(); // obtener errores
+                    }else{
+                        logDeInstruccion = ">>>>> Error en los parametros: ";
+                    }
                 } else {
                     query.realizarConsulta(parametros);
                     logDeInstruccion = "$ $ $ $ $ $ Se ejecutó la instrucción exitosamente";
@@ -149,7 +161,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
         String titulo = "                   RESULTADO:                      " + "\n";
         String espacios = "\n" + "\n";
         String nuevoTexto = aviso + titulo + log + espacios;
-        // consola.setText(nuevoTexto);
+        consola.setTexto(nuevoTexto);
     }
 
 }

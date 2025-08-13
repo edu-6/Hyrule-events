@@ -20,7 +20,7 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     // frontend
     private LoginPanel loginPanel;
     private JPanel panelActual;
-    
+    private ConsolaDeTexto consola;
 
     //Backend
     private GestorDeArchivos gestorDeArchivos;
@@ -38,6 +38,7 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         this.panelActual = loginPanel;
         //this.add(loginPanel, BorderLayout.CENTER);
         this.añadirPanel(loginPanel);
+        this.consola = new ConsolaDeTexto();
         
         //Backend
         this.gestorDeArchivos = new GestorDeArchivos();
@@ -60,10 +61,10 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     
     
     public void ejecutarArchivoDeTexto(){
-        
+        añadirPanel(consola);
         File archivo = gestorDeArchivos.getArchivoDeTexto();
         int velocidad = gestorDeArchivos.getVelocidadDeProcesamiento();
-        EjecutadorDeInstrucciones ejecutador = new EjecutadorDeInstrucciones(archivo,velocidad);
+        EjecutadorDeInstrucciones ejecutador = new EjecutadorDeInstrucciones(archivo,velocidad,consola, dbConexion.getConnection());
         Thread hilo = new Thread(ejecutador);
         hilo.start();
     }
