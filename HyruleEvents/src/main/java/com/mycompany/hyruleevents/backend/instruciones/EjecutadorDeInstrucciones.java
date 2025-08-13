@@ -4,10 +4,15 @@
  */
 package com.mycompany.hyruleevents.backend.instruciones;
 
+import com.mycompany.hyruleevents.backend.consultas.ConsultaSQL;
+import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,8 +20,22 @@ import java.io.IOException;
  */
 public class EjecutadorDeInstrucciones implements Runnable {
 
+    private static final String REGISTRO_EVENTO = "REGISTRO_EVENTO";
+    private static final String REGISTRO_PARTICIPANTE = "REGISTRO_PARTICIPANTE";
+
+    private static final String INSCRIPCION = "INSCRIPCION";
+    private static final String PAGO = "PAGO";
+    private static final String VALIDAR_INSCRIPCION = "VALIDAR_INSCRIPCION";
+    private static final String REGISTRO_ACTIVIDAD = "REGISTRO_ACTIVIDAD";
+    private static final String ASISTENCIA = "ASISTENCIA";
+    private static final String CERTIFICADO = "CERTIFICADO";
+    private static final String REPORTE_PARTICIPANTES = "REPORTE_PARTICIPANTES";
+    private static final String REPORTE_ACTIVIDADES = "REPORTE_ACTIVIDADES";
+    private static final String REPORTE_EVENTOS = "REPORTE_EVENTOS";
+
     private File archivo;
     private int velocidad;
+    private Connection connection;
 
     public EjecutadorDeInstrucciones(File archivo, int velocidad) {
         this.archivo = archivo;
@@ -35,9 +54,9 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 Thread.sleep(velocidad);
                 linea = buffer.readLine();
             }
-            
+
             System.out.println("Terminado exitosamente");
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -53,46 +72,84 @@ public class EjecutadorDeInstrucciones implements Runnable {
             instruccion += linea.charAt(indice);
             indice++;
         }
+        String logDeInstruccion = "";
+
+        ValidadorDeInstruccion validador = null;
+        ConsultaSQL query = null;
+        String[] parametros = null;
+        boolean instruccionReconocida = true;
 
         switch (instruccion) {
-            case "REGISTRO_EVENTO":
-                System.out.println("es un evento");
+            case REGISTRO_EVENTO:
+                System.out.println("Es un registro de evento");
+                validador = new RegistroDeEventoValidador();
+                parametros = validador.verificarInstruccion(instruccion);
+                query = new EventoUpdate(connection);
                 break;
-            case "REGISTRO_PARTICIPANTE":
+            case REGISTRO_PARTICIPANTE:
                 System.out.println("Es un registro de participante");
                 break;
-            case "INSCRIPCION":
+            case INSCRIPCION:
                 System.out.println("es una inscripcion");
 
                 break;
-            case "PAGO":
+            case PAGO:
                 System.out.println("Registro de un pago");
                 break;
-            case "VALIDAR_INSCRIPCION":
+            case VALIDAR_INSCRIPCION:
                 System.out.println("Es validación de inscripcion");
                 break;
-                
-            case "REGISTRO_ACTIVIDAD":
+
+            case REGISTRO_ACTIVIDAD:
                 System.out.println("Es registro de actividad");
                 break;
-            case "ASISTENCIA":
+            case ASISTENCIA:
                 System.out.println("Es registro de asistencia");
                 break;
-            case "CERTIFICADO":
+            case CERTIFICADO:
                 System.out.println("petición de certificado");
                 break;
-            case "REPORTE_PARTICIPANTES":
+            case REPORTE_PARTICIPANTES:
                 System.out.println("reporte de participantes");
                 break;
-            case "REPORTE_ACTIVIDADES":
+            case REPORTE_ACTIVIDADES:
                 System.out.println("reporte de actividades");
                 break;
-            case "REPORTE_EVENTOS":
+            case REPORTE_EVENTOS:
                 System.out.println("reporte de eventos");
                 break;
             default:
-                System.out.println("Operación no reconocida");
+                instruccionReconocida = false;
+                break;
         }
+
+        if (instruccionReconocida) {
+            try {
+
+                if (parametros == null) {
+                    logDeInstruccion = ">>>>> Error en los parametros: " + "\n" + validador.getLogs(); // obtener errores
+                } else {
+                    query.realizarConsulta(parametros);
+                    logDeInstruccion = "$ $ $ $ $ $ Se ejecutó la instrucción exitosamente";
+                }
+
+            } catch (SQLException e) {
+                logDeInstruccion = ">>>>>> Error al hacer la consulta:" + "\n" + e.getMessage();
+            }
+        } else {
+            logDeInstruccion = ">>>>>>>La instrucción no fué reconocida";
+        }
+
+        actualizarConsolaLogs(linea, logDeInstruccion); // actualiza con lo que pasó en la instruccion
+
+    }
+
+    private void actualizarConsolaLogs(String linea, String log) {
+        String aviso = "======================= Ejecutando la instruccion: ===============================" + "\n" + linea + "\n";
+        String titulo = "                   RESULTADO:                      " + "\n";
+        String espacios = "\n" + "\n";
+        String nuevoTexto = aviso + titulo + log + espacios;
+        // consola.setText(nuevoTexto);
     }
 
 }
