@@ -6,7 +6,9 @@ package com.mycompany.hyruleevents.backend.instruciones;
 
 import com.mycompany.hyruleevents.backend.consultas.ConsultaSQL;
 import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
+import com.mycompany.hyruleevents.backend.consultas.ParticipanteUpdate;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
 import com.mycompany.hyruleevents.fronted.ConsolaDeTexto;
 import java.io.BufferedReader;
 import java.io.File;
@@ -68,7 +70,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
 
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
 
         }
 
@@ -77,7 +79,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
     private void ejecutarInstruccion(String linea, int numeroLinea) {
         String instruccion = "";
         int indice = 0;
-        while (linea.charAt(indice) != '(') {
+        while (indice < instruccion.length() && linea.charAt(indice) != '(') {
             instruccion += linea.charAt(indice);
             indice++;
         }
@@ -98,6 +100,10 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 break;
             case REGISTRO_PARTICIPANTE:
                 System.out.println("Es un registro de participante");
+                validador = new RegistroDeParticipanteValidador();
+                parametros = validador.verificarInstruccion(linea);
+                query = new ParticipanteUpdate(connection);
+                System.out.println("Saliendo del switch");
                 break;
             case INSCRIPCION:
                 System.out.println("es una inscripcion");
