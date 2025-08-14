@@ -79,7 +79,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
     private void ejecutarInstruccion(String linea, int numeroLinea) {
         String instruccion = "";
         int indice = 0;
-        while (indice < instruccion.length() && linea.charAt(indice) != '(') {
+        while (indice < linea.length() && linea.charAt(indice) != '(') {
             instruccion += linea.charAt(indice);
             indice++;
         }
