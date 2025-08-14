@@ -28,13 +28,14 @@ public class ConsolaDeTexto extends javax.swing.JPanel {
         this.setBackground(Color.ORANGE);
         this.setPreferredSize(new Dimension(1000, 600));
         consola = new JTextArea();
-        consola.setFont(new Font("Monospaced", Font.PLAIN, 15));
-        consola.setBackground(Color.GRAY);
-        consola.setForeground(Color.WHITE);
+        consola.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        consola.setBackground(Color.lightGray);
+        consola.setForeground(Color.darkGray);
         consola.setEditable(false);
         botonContinuar = new JButton("Continuar");
         botonContinuar.setBackground(Color.ORANGE);
         this.add(botonContinuar, BorderLayout.NORTH);
+        this.botonContinuar.setEnabled(false);
         
         consolaPane = new JScrollPane(consola,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(consolaPane, BorderLayout.CENTER);
@@ -43,6 +44,16 @@ public class ConsolaDeTexto extends javax.swing.JPanel {
     public void setTexto(String texto){
         String textoAnterior =consola.getText();
         consola.setText(textoAnterior +"\n"+ texto);
+    }
+    
+    public void activarBtnSiguente(){
+        this.botonContinuar.setEnabled(true);
+    }
+    
+    public void ponerTitulo(String nombreArchivo){
+        String titulo = "======================= NOMBRE DEL ARCHIVO: "+nombreArchivo+"=======================";
+        String espacio = "\n"+"\n"+"\n"+"\n";
+        consola.setText(titulo + espacio);
     }
     
     

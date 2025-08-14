@@ -53,14 +53,18 @@ public class EjecutadorDeInstrucciones implements Runnable {
         try (FileReader reader = new FileReader(archivo);) {
             BufferedReader buffer = new BufferedReader(reader);
             String linea = buffer.readLine();
-
+            int numeroLinea = 0;
+            
+            consola.ponerTitulo(archivo.getName());
+            
             while (linea != null) {
-                this.ejecutarInstruccion(linea);
+                numeroLinea++;
+                this.ejecutarInstruccion(linea,numeroLinea);
                 Thread.sleep(velocidad);
                 linea = buffer.readLine();
             }
 
-            System.out.println("Terminado exitosamente");
+            consola.activarBtnSiguente();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,7 +74,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
 
     }
 
-    private void ejecutarInstruccion(String linea) {
+    private void ejecutarInstruccion(String linea, int numeroLinea) {
         String instruccion = "";
         int indice = 0;
         while (linea.charAt(indice) != '(') {
@@ -152,12 +156,12 @@ public class EjecutadorDeInstrucciones implements Runnable {
             logDeInstruccion = ">>>>>>>La instrucción no fué reconocida";
         }
 
-        actualizarConsolaLogs(linea, logDeInstruccion); // actualiza con lo que pasó en la instruccion
+        actualizarConsolaLogs(linea, logDeInstruccion,numeroLinea); // actualiza con lo que pasó en la instruccion
 
     }
 
-    private void actualizarConsolaLogs(String linea, String log) {
-        String aviso = "======================= Ejecutando la instruccion: ===============================" + "\n" + linea + "\n";
+    private void actualizarConsolaLogs(String linea, String log, int numeroLinea) {
+        String aviso = "======================= Ejecutando la linea: "+numeroLinea+" ===============================" + "\n" + linea + "\n";
         String titulo = "                   RESULTADO:                      " + "\n";
         String espacios = "\n" + "\n";
         String nuevoTexto = aviso + titulo + log + espacios;
