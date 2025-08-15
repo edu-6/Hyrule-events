@@ -17,6 +17,11 @@ public class AsistenciaUpdate extends ConsultaSQL {
     private static final String INSERT_ASISTENCIA = "INSERT INTO asistencia "
             + "(correo_del_participante, codigo_actividad) "
             + "VALUES (?, ?)";
+    
+    
+    private static final String AGREGAR_CUPO_USADO = "UPDATE actividad "
+            + "SET cupos_disponibles_actividad = cupos_disponibles_actividad - ? WHERE codigo = ?";
+    
     public AsistenciaUpdate(Connection connection) {
         super(connection);
     }
@@ -27,12 +32,20 @@ public class AsistenciaUpdate extends ConsultaSQL {
         String correoParticipante = parametros[0];
         String codigoActividad = parametros[1];
         
-         PreparedStatement ps = connection.prepareStatement(INSERT_ASISTENCIA);
+        PreparedStatement ps = connection.prepareStatement(INSERT_ASISTENCIA);
         ps.setString(1, correoParticipante);
         ps.setString(2, codigoActividad);
 
         ps.executeUpdate();
         ps.close();
+        
+        
+        PreparedStatement ps2 = connection.prepareStatement(AGREGAR_CUPO_USADO);
+        ps2.setInt(1, 1);
+        ps2.setString(2, codigoActividad);
+
+        ps2.executeUpdate();
+        ps2.close();
 
     }
 
