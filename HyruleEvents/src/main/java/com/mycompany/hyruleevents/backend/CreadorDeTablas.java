@@ -50,6 +50,7 @@ public class CreadorDeTablas {
                     + "    codigo VARCHAR(15) NOT NULL,"
                     + "    cupo_maximo_evento INTEGER NOT NULL,"
                     + "    cupos_diposnibles_evento INTEGER NOT NULL,"
+                    + "    cupos_disponibles_para_actividades INTEGER NOT NULL,"
                     + "    ubicacion VARCHAR(149) NOT NULL,"
                     + "    CONSTRAINT pk_evento PRIMARY KEY (codigo)"
                     + ")");
@@ -67,7 +68,7 @@ public class CreadorDeTablas {
                     + "    codigo_evento VARCHAR(15) NOT NULL,"
                     + "    codigo VARCHAR(20) NOT NULL,"
                     + "    cupo_maximo_actividad INTEGER NOT NULL,"
-                    + "    cupos_diposnibles_actividad INTEGER NOT NULL,"
+                    + "    cupos_disponibles_actividad INTEGER NOT NULL,"
                     + "    hora_inicio TIME NOT NULL,"
                     + "    hora_fin TIME NOT NULL,"
                     + "    correo_del_poniente VARCHAR(40) NOT NULL,"
