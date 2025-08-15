@@ -5,6 +5,7 @@
 package com.mycompany.hyruleevents.backend.instruciones;
 
 import com.mycompany.hyruleevents.backend.consultas.ActividadUpdate;
+import com.mycompany.hyruleevents.backend.consultas.AsistenciaUpdate;
 import com.mycompany.hyruleevents.backend.consultas.ConsultaSQL;
 import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.InscripcionUpdate;
@@ -14,6 +15,7 @@ import com.mycompany.hyruleevents.backend.consultas.ValidarInscripcion;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.InscripcionValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.PagoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarActividadValidador;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarAsistenciaValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
@@ -144,6 +146,10 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 break;
             case ASISTENCIA:
                 System.out.println("Es registro de asistencia");
+                validador = new RegistrarAsistenciaValidador();
+                parametros = validador.verificarInstruccion(linea);
+                query = new AsistenciaUpdate(connection);
+                System.out.println("Saliendo del switch");
                 break;
             case CERTIFICADO:
                 System.out.println("petición de certificado");

@@ -118,7 +118,6 @@ public class CreadorDeTablas {
             stmTablaAsistencia.executeUpdate("CREATE TABLE IF NOT EXISTS asistencia("
                     + "    correo_del_participante VARCHAR(40) NOT NULL,"
                     + "    codigo_actividad VARCHAR(15) NOT NULL,"
-                    + "    validad INTEGER NOT NULL,"
                     + "    CONSTRAINT pk_asistencia PRIMARY KEY (correo_del_participante, codigo_actividad),"
                     + "    CONSTRAINT fk_asistencia_correo_participante FOREIGN KEY (correo_del_participante) REFERENCES participante (correo_electronico),"
                     + "    CONSTRAINT fk_asistencia_codigo_actividad FOREIGN KEY (codigo_actividad) REFERENCES actividad (codigo)"
