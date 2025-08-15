@@ -4,6 +4,7 @@
  */
 package com.mycompany.hyruleevents.backend.instruciones.validadores;
 
+import com.mycompany.hyruleevents.backend.instruciones.ValidadorDeHora;
 import com.mycompany.hyruleevents.backend.instruciones.ValidadorDeInstruccion;
 import com.mycompany.hyruleevents.backend.instruciones.enums.Actividad;
 import com.mycompany.hyruleevents.backend.instruciones.enums.Dependencia;
@@ -16,6 +17,8 @@ import com.mycompany.hyruleevents.backend.instruciones.enums.Parametro;
 public class RegistrarActividadValidador extends ValidadorDeInstruccion {
 
     private static final int INDICE_TIPO_ACTIVIDAD = 2;
+    private static final int INDICE_HORA_INICIO = 5;
+    private static final int INDICE_HORA_FIN = 6;
     public RegistrarActividadValidador() {
         super(19, 8, "REGISTRO_ACTIVIDAD");
     }
@@ -50,12 +53,17 @@ public class RegistrarActividadValidador extends ValidadorDeInstruccion {
             }
         }
 
-        if (valorEncontrado) {
-            return true;
-        } else {
-            logs = ">>> " +tipoActividad + " no es un tipo de actividad";  
-            return false;
+        if (!valorEncontrado) {
+            logs = ">>> " +tipoActividad + " no es un tipo de actividad"+"\n"; 
         }
+        
+        ValidadorDeHora horaValidador = new ValidadorDeHora();
+         boolean horasCorrectas = horaValidador.validarHoras(parametros[INDICE_HORA_INICIO], parametros[INDICE_HORA_FIN]);
+        if(!horasCorrectas){
+            logs += ">>>  El formato de hora no es correcto"; 
+        }
+        
+        return valorEncontrado && horasCorrectas;
     }
 
 }
