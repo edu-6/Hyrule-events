@@ -9,10 +9,12 @@ import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.InscripcionUpdate;
 import com.mycompany.hyruleevents.backend.consultas.PagoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.ParticipanteUpdate;
+import com.mycompany.hyruleevents.backend.consultas.ValidarInscripcion;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.InscripcionValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.PagoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
 import com.mycompany.hyruleevents.fronted.ConsolaDeTexto;
 import java.io.BufferedReader;
 import java.io.File;
@@ -125,6 +127,10 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 break;
             case VALIDAR_INSCRIPCION:
                 System.out.println("Es validación de inscripcion");
+                validador = new ValidarInscripcionValidador();
+                parametros = validador.verificarInstruccion(linea);
+                query = new ValidarInscripcion(connection);
+                System.out.println("Saliendo del switch");
                 break;
 
             case REGISTRO_ACTIVIDAD:

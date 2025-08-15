@@ -102,6 +102,7 @@ public class CreadorDeTablas {
                     + "    correo_participante VARCHAR(40) NOT NULL,"
                     + "    codigo_evento VARCHAR(15) NOT NULL,"
                     + "    tipo_de_inscripcion VARCHAR(15) NOT NULL,"
+                    + "    validada INTEGER NOT NULL,"
                     + "    CONSTRAINT pk_inscripcion PRIMARY KEY (correo_participante, codigo_evento),"
                     + "    CONSTRAINT fk_inscripcion_correo_participante FOREIGN KEY (correo_participante) REFERENCES participante (correo_electronico),"
                     + "    CONSTRAINT fk_inscripcion_codigo_evento FOREIGN KEY (codigo_evento) REFERENCES evento (codigo)"

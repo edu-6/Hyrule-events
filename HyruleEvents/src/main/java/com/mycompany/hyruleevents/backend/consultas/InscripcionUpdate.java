@@ -15,8 +15,8 @@ import java.sql.SQLException;
 public class InscripcionUpdate extends ConsultaSQL {
 
     private static final String INSERT_INSCRIPCION = "INSERT INTO inscripcion "
-            + "(correo_participante, codigo_evento, tipo_de_inscripcion)"
-            + "VALUES (?, ?, ?)";
+            + "(correo_participante, codigo_evento, tipo_de_inscripcion, validada)"
+            + "VALUES (?, ?, ?, ?)";
 
     public InscripcionUpdate(Connection connection) {
         super(connection);
@@ -27,12 +27,13 @@ public class InscripcionUpdate extends ConsultaSQL {
         String correo_participante = parametros[0];
         String codigo_evento = parametros[1];
         String tipo_de_inscripcion = parametros[2];
-        
+        String validada = "0";
         PreparedStatement ps = connection.prepareStatement(INSERT_INSCRIPCION);
         
         ps.setString(1, correo_participante);
         ps.setString(2, codigo_evento);
         ps.setString(3, tipo_de_inscripcion);
+        ps.setString(4, validada);
         
         ps.executeUpdate();
         ps.close();
