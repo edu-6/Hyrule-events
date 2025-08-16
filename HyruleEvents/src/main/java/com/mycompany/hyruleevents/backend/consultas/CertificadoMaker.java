@@ -60,7 +60,7 @@ public class CertificadoMaker extends ConsultaSQL {
             }
         }
         
-        String nombreReporte = correo +"-"+codigoEvento+"-"+nombreParticipante;
+        String nombreReporte = correo +"-"+codigoEvento+"-"+fechaEvento;
         escritorDeReportes.escribirCertificado(nombreReporte, nombreParticipante, tipoParticipante, tituloEvento, ubicacion, fechaEvento);
         
         
