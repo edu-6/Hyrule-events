@@ -52,6 +52,7 @@ public class CreadorDeTablas {
                     + "    cupos_diposnibles_evento INTEGER NOT NULL,"
                     + "    cupos_disponibles_para_actividades INTEGER NOT NULL,"
                     + "    ubicacion VARCHAR(149) NOT NULL,"
+                    + "    costo DECIMAL(10,2) NOT NULL,"
                     + "    CONSTRAINT pk_evento PRIMARY KEY (codigo)"
                     + ")");
         } catch (SQLException e) {
@@ -87,7 +88,7 @@ public class CreadorDeTablas {
                     + "    correo_participante VARCHAR(40) NOT NULL,"
                     + "    codigo_evento VARCHAR(20) NOT NULL,"
                     + "    metodo_pago VARCHAR(15) NOT NULL,"
-                    + "    monto INTEGER NOT NULL,"
+                    + "    monto DECIMAL(10,2) NOT NULL,"
                     + "    CONSTRAINT pk_pago PRIMARY KEY (correo_participante, codigo_evento),"
                     + "    CONSTRAINT fk_pago_correo_participante FOREIGN KEY (correo_participante) REFERENCES participante (correo_electronico),"
                     + "    CONSTRAINT fk_pago_codigo_evento FOREIGN KEY (codigo_evento) REFERENCES evento (codigo)"

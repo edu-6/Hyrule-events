@@ -20,14 +20,14 @@ public class RegistroDeEventoValidador extends ValidadorDeInstruccion {
     private Evento eventoEnun;
 
     public RegistroDeEventoValidador() {
-        super(16, 6, "REGISTRO_EVENTO");
+        super(16, 7, "REGISTRO_EVENTO");
     }
 
     @Override
     protected void inicializarTiposDeParametro() {
 
         Parametro[] tipo = {Parametro.STRING, Parametro.STRING, Parametro.STRING, Parametro.STRING,
-            Parametro.STRING, Parametro.ENTERO};
+            Parametro.STRING, Parametro.ENTERO, Parametro.DECIMAL};
 
         this.tiposDeParametro = tipo;
     }
@@ -35,7 +35,7 @@ public class RegistroDeEventoValidador extends ValidadorDeInstruccion {
     @Override
     protected void indicarParametrosObligatorios() {
         Dependencia[] tipoDeDependencia = {Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO,
-            Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO};
+            Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO, Dependencia.OBLIGATORIO};
 
         this.tipoDeDependencia = tipoDeDependencia;
     }

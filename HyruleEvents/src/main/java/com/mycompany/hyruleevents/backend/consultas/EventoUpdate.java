@@ -16,8 +16,8 @@ import java.sql.SQLException;
 public class EventoUpdate extends ConsultaSQL {
 
     private static final String INSERT_EVENTO = "INSERT INTO evento "
-            + "(codigo, fecha_evento, tipo_evento, titulo_evento, ubicacion, cupo_maximo_evento,cupos_diposnibles_evento,cupos_disponibles_para_actividades) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            + "(codigo, fecha_evento, tipo_evento, titulo_evento, ubicacion, cupo_maximo_evento,cupos_diposnibles_evento,cupos_disponibles_para_actividades,costo) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     public EventoUpdate(Connection connection) {
         super(connection);
@@ -31,6 +31,7 @@ public class EventoUpdate extends ConsultaSQL {
         String titulo = parametros[3];
         String ubicacion = parametros[4];
         String cupo = parametros[5];
+        String costo= parametros[6];
 
         PreparedStatement ps = connection.prepareStatement(INSERT_EVENTO);
         ps.setString(1, codigo);
@@ -41,6 +42,7 @@ public class EventoUpdate extends ConsultaSQL {
         ps.setString(6, cupo);
         ps.setString(7, cupo); //  para los cupos disponibles
         ps.setString(8, cupo); // para cupos de actividades disponibles
+        ps.setString(9,costo);
         ps.executeUpdate();
         ps.close();
     }
