@@ -19,6 +19,7 @@ import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarAsis
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
+import com.mycompany.hyruleevents.backend.verificacionesDB.ExceptionEnDB;
 import com.mycompany.hyruleevents.fronted.ConsolaDeTexto;
 import java.io.BufferedReader;
 import java.io.File;
@@ -49,10 +50,10 @@ public class EjecutadorDeInstrucciones implements Runnable {
     private File archivo;
     private int velocidad;
     private Connection connection;
-    
+    private String logDeInstruccion = "";
     private ConsolaDeTexto consola;
 
-    public EjecutadorDeInstrucciones(File archivo, int velocidad, ConsolaDeTexto consola,Connection connection) {
+    public EjecutadorDeInstrucciones(File archivo, int velocidad, ConsolaDeTexto consola, Connection connection) {
         this.archivo = archivo;
         this.velocidad = velocidad;
         this.consola = consola;
@@ -66,12 +67,20 @@ public class EjecutadorDeInstrucciones implements Runnable {
             BufferedReader buffer = new BufferedReader(reader);
             String linea = buffer.readLine();
             int numeroLinea = 0;
-            
+
             consola.ponerTitulo(archivo.getName());
-            
+
             while (linea != null) {
                 numeroLinea++;
-                this.ejecutarInstruccion(linea,numeroLinea);
+                try {
+                    logDeInstruccion = ""; // limpiar la linea
+                    this.ejecutarInstruccion(linea, numeroLinea);
+                } catch (InstruccionException e) {
+                    logDeInstruccion = e.getMessage();
+                }
+                
+                actualizarConsolaLogs(linea, logDeInstruccion, numeroLinea); // actualiza con lo que pasó en la instruccion
+                
                 Thread.sleep(velocidad);
                 linea = buffer.readLine();
             }
@@ -86,70 +95,49 @@ public class EjecutadorDeInstrucciones implements Runnable {
 
     }
 
-    private void ejecutarInstruccion(String linea, int numeroLinea) {
+    private void ejecutarInstruccion(String linea, int numeroLinea) throws InstruccionException {
         String instruccion = "";
         int indice = 0;
         while (indice < linea.length() && linea.charAt(indice) != '(') {
             instruccion += linea.charAt(indice);
             indice++;
         }
-        String logDeInstruccion = "";
+         
 
-        ValidadorDeInstruccion validador = null;
+        ValidadorDeInstruccion validadorParametros = null;
         ConsultaSQL query = null;
         String[] parametros = null;
         boolean instruccionReconocida = true;
 
         switch (instruccion) {
             case REGISTRO_EVENTO:
-                System.out.println("Es un registro de evento");
-                validador = new RegistroDeEventoValidador();
-                parametros = validador.verificarInstruccion(linea); // procesar la linea
+                validadorParametros = new RegistroDeEventoValidador();
                 query = new EventoUpdate(connection);
-                System.out.println("Saliendo del switch");
                 break;
             case REGISTRO_PARTICIPANTE:
-                System.out.println("Es un registro de participante");
-                validador = new RegistroDeParticipanteValidador();
-                parametros = validador.verificarInstruccion(linea);
+                validadorParametros = new RegistroDeParticipanteValidador();
                 query = new ParticipanteUpdate(connection);
-                System.out.println("Saliendo del switch");
                 break;
             case INSCRIPCION:
-                System.out.println("es una inscripcion");
-                validador = new InscripcionValidador();
-                parametros = validador.verificarInstruccion(linea);
+                validadorParametros = new InscripcionValidador();
                 query = new InscripcionUpdate(connection);
-                System.out.println("Saliendo del switch");
                 break;
             case PAGO:
-                System.out.println("Registro de un pago");
-                validador = new PagoValidador();
-                parametros = validador.verificarInstruccion(linea);
+                validadorParametros = new PagoValidador();
                 query = new PagoUpdate(connection);
-                System.out.println("Saliendo del switch");
                 break;
             case VALIDAR_INSCRIPCION:
-                System.out.println("Es validación de inscripcion");
-                validador = new ValidarInscripcionValidador();
-                parametros = validador.verificarInstruccion(linea);
+                validadorParametros = new ValidarInscripcionValidador();
                 query = new ValidarInscripcion(connection);
-                System.out.println("Saliendo del switch");
                 break;
 
             case REGISTRO_ACTIVIDAD:
-                System.out.println("Es registro de actividad");
-                validador = new RegistrarActividadValidador();
-                parametros = validador.verificarInstruccion(linea);
+                validadorParametros = new RegistrarActividadValidador();
                 query = new ActividadUpdate(connection);
-                System.out.println("Saliendo del switch");
                 break;
             case ASISTENCIA:
-                System.out.println("Es registro de asistencia");
-                validador = new RegistrarAsistenciaValidador();
-                parametros = validador.verificarInstruccion(linea);
+                validadorParametros = new RegistrarAsistenciaValidador();
                 query = new AsistenciaUpdate(connection);
-                System.out.println("Saliendo del switch");
                 break;
             case CERTIFICADO:
                 System.out.println("petición de certificado");
@@ -168,35 +156,39 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 break;
         }
 
-        System.out.println("Ahora toca ejecutar archivo");
-        if (instruccionReconocida) {
-            try {
-
-                if (parametros == null) {
-                    
-                    if(validador != null){
-                        logDeInstruccion = ">>>>> Error en los parametros: " + "\n" + validador.getLogs(); // obtener errores
-                    }else{
-                        logDeInstruccion = ">>>>> Error en los parametros: ";
-                    }
-                } else {
-                    query.realizarConsulta(parametros);
-                    logDeInstruccion = "$ $ $ $ $ $ Se ejecutó la instrucción exitosamente";
-                }
-
-            } catch (SQLException e) {
-                logDeInstruccion = ">>>>>> Error al hacer la consulta:" + "\n" + e.getMessage();
-            }
-        } else {
-            logDeInstruccion = ">>>>>>>La instrucción no fué reconocida";
+        // esta linea así se queda porque si no encuentra instruccion pues no hay verificador
+        if (validadorParametros != null) {
+            parametros = validadorParametros.verificarInstruccion(linea);
         }
 
-        actualizarConsolaLogs(linea, logDeInstruccion,numeroLinea); // actualiza con lo que pasó en la instruccion
+        if (!instruccionReconocida) {
+            throw new InstruccionException(">>>>>>>La instrucción no fué reconocida");
+        }
 
+        if (parametros == null) {
+            String mensaje;
+            if(validadorParametros != null){
+                 mensaje= ">>>>> Error en los parametros: " + "\n" + validadorParametros.getLogs();
+            }else{
+                mensaje = ">>>>> Error en los parametros";
+            }
+            throw new InstruccionException(mensaje); // lanzar exception
+        }
+        
+        
+        // ejecutar la instrucción
+        try {
+            //validar en DataBase
+            //añadir ecetpion en database 
+            query.realizarConsulta(parametros); // ejecutar la database;
+            logDeInstruccion = "$ $ $ $ $ $ Se ejecutó la instrucción exitosamente";
+        }  catch (SQLException e) { // añadir exception en database;
+             throw new InstruccionException(">>>>>> Error al hacer la consulta:" + "\n" + e.getMessage());
+        }
     }
 
     private void actualizarConsolaLogs(String linea, String log, int numeroLinea) {
-        String aviso = "======================= Ejecutando la linea: "+numeroLinea+" ===============================" + "\n" + linea + "\n";
+        String aviso = "======================= Ejecutando la linea: " + numeroLinea + " ===============================" + "\n" + linea + "\n";
         String titulo = "                   RESULTADO:                      " + "\n";
         String espacios = "\n" + "\n";
         String nuevoTexto = aviso + titulo + log + espacios;
