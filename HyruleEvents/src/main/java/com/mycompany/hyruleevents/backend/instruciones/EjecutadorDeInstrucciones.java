@@ -24,6 +24,7 @@ import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEve
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.CertificadoVerificador;
+import com.mycompany.hyruleevents.backend.verificacionesDB.EventoVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ExceptionEnDB;
 import com.mycompany.hyruleevents.backend.verificacionesDB.VerificadorEnDB;
 import com.mycompany.hyruleevents.fronted.ConsolaDeTexto;
@@ -123,6 +124,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
         switch (instruccion) {
             case REGISTRO_EVENTO:
                 validadorParametros = new RegistroDeEventoValidador();
+                verificadorDB = new EventoVerificador(connection);
                 query = new EventoUpdate(connection);
                 break;
             case REGISTRO_PARTICIPANTE:
