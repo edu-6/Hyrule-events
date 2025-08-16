@@ -64,7 +64,7 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         añadirPanel(consola);
         File archivo = gestorDeArchivos.getArchivoDeTexto();
         int velocidad = gestorDeArchivos.getVelocidadDeProcesamiento();
-        EjecutadorDeInstrucciones ejecutador = new EjecutadorDeInstrucciones(archivo,velocidad,consola, dbConexion.getConnection());
+        EjecutadorDeInstrucciones ejecutador = new EjecutadorDeInstrucciones(gestorDeArchivos,velocidad,consola, dbConexion.getConnection());
         Thread hilo = new Thread(ejecutador);
         hilo.start();
     }

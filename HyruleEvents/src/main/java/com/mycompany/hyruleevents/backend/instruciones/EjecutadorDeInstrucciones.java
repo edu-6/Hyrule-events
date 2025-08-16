@@ -4,14 +4,18 @@
  */
 package com.mycompany.hyruleevents.backend.instruciones;
 
+import com.mycompany.hyruleevents.backend.EscritorDeReportes;
+import com.mycompany.hyruleevents.backend.GestorDeArchivos;
 import com.mycompany.hyruleevents.backend.consultas.ActividadUpdate;
 import com.mycompany.hyruleevents.backend.consultas.AsistenciaUpdate;
+import com.mycompany.hyruleevents.backend.consultas.CertificadoMaker;
 import com.mycompany.hyruleevents.backend.consultas.ConsultaSQL;
 import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.InscripcionUpdate;
 import com.mycompany.hyruleevents.backend.consultas.PagoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.ParticipanteUpdate;
 import com.mycompany.hyruleevents.backend.consultas.ValidarInscripcion;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.CertificadoValidacion;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.InscripcionValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.PagoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarActividadValidador;
@@ -19,7 +23,9 @@ import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarAsis
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
+import com.mycompany.hyruleevents.backend.verificacionesDB.CertificadoVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ExceptionEnDB;
+import com.mycompany.hyruleevents.backend.verificacionesDB.VerificadorEnDB;
 import com.mycompany.hyruleevents.fronted.ConsolaDeTexto;
 import java.io.BufferedReader;
 import java.io.File;
@@ -52,12 +58,16 @@ public class EjecutadorDeInstrucciones implements Runnable {
     private Connection connection;
     private String logDeInstruccion = "";
     private ConsolaDeTexto consola;
-
-    public EjecutadorDeInstrucciones(File archivo, int velocidad, ConsolaDeTexto consola, Connection connection) {
-        this.archivo = archivo;
+    private GestorDeArchivos gestorArchivos;
+    private EscritorDeReportes escritorDeReportes;
+    
+    public EjecutadorDeInstrucciones(GestorDeArchivos gestorArchivos, int velocidad, ConsolaDeTexto consola, Connection connection) {
+        this.gestorArchivos = gestorArchivos;
+        this.archivo = gestorArchivos.getArchivoDeTexto();
         this.velocidad = velocidad;
         this.consola = consola;
         this.connection = connection;
+        this.escritorDeReportes =  new EscritorDeReportes(gestorArchivos);
     }
 
     @Override
@@ -105,7 +115,8 @@ public class EjecutadorDeInstrucciones implements Runnable {
          
 
         ValidadorDeInstruccion validadorParametros = null;
-        ConsultaSQL query = null;
+        VerificadorEnDB verificadorDB = null; // verificador de integridad en a db
+        ConsultaSQL query = null;  // ejecutador de consulta
         String[] parametros = null;
         boolean instruccionReconocida = true;
 
@@ -140,7 +151,9 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 query = new AsistenciaUpdate(connection);
                 break;
             case CERTIFICADO:
-                System.out.println("petición de certificado");
+                validadorParametros = new CertificadoValidacion();
+                verificadorDB = new CertificadoVerificador(connection);
+                query = new CertificadoMaker(escritorDeReportes, connection);
                 break;
             case REPORTE_PARTICIPANTES:
                 System.out.println("reporte de participantes");
@@ -180,9 +193,14 @@ public class EjecutadorDeInstrucciones implements Runnable {
         try {
             //validar en DataBase
             //añadir ecetpion en database 
+            if(verificadorDB != null){
+                verificadorDB.verificarValidezConsulta(parametros);
+            }
             query.realizarConsulta(parametros); // ejecutar la database;
             logDeInstruccion = "$ $ $ $ $ $ Se ejecutó la instrucción exitosamente";
-        }  catch (SQLException e) { // añadir exception en database;
+        }catch(ExceptionEnDB e){
+            throw new InstruccionException(">>>>>> Error al verificar en la base de datos:" + "\n" + e.getMessage());
+        }catch (SQLException e) { // añadir exception en database;
              throw new InstruccionException(">>>>>> Error al hacer la consulta:" + "\n" + e.getMessage());
         }
     }
