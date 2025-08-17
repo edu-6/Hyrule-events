@@ -30,6 +30,7 @@ import com.mycompany.hyruleevents.backend.verificacionesDB.ExceptionEnDB;
 import com.mycompany.hyruleevents.backend.verificacionesDB.InscripcionVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.PagoVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ParticipanteVerificador;
+import com.mycompany.hyruleevents.backend.verificacionesDB.RegsitroAsistenciaVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ValidarInscripcionVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.VerificadorEnDB;
 import com.mycompany.hyruleevents.fronted.ConsolaDeTexto;
@@ -160,6 +161,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 break;
             case ASISTENCIA:
                 validadorParametros = new RegistrarAsistenciaValidador();
+                verificadorDB = new RegsitroAsistenciaVerificador(connection);
                 query = new AsistenciaUpdate(connection);
                 break;
             case CERTIFICADO:

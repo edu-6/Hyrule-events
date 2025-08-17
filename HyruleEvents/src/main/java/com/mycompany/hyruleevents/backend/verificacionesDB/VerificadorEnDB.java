@@ -17,7 +17,7 @@ public abstract class VerificadorEnDB {
 
     protected Connection connection;
     private static final String SELECT_EVENTO = "SELECT * FROM evento WHERE codigo = ? ";
-    private static final String SELECT_PARTICIPANTE = "SELECT * FROM participante WHERE correo_electronico = ? ";
+    protected static final String SELECT_PARTICIPANTE = "SELECT * FROM participante WHERE correo_electronico = ? ";
 
     public VerificadorEnDB(Connection connection) {
         this.connection = connection;
