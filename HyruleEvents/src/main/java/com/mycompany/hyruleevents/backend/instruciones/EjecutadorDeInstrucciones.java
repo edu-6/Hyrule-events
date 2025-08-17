@@ -23,6 +23,7 @@ import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarAsis
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
+import com.mycompany.hyruleevents.backend.verificacionesDB.ActividadVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.CertificadoVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.EventoVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ExceptionEnDB;
@@ -154,6 +155,7 @@ public class EjecutadorDeInstrucciones implements Runnable {
 
             case REGISTRO_ACTIVIDAD:
                 validadorParametros = new RegistrarActividadValidador();
+                verificadorDB = new ActividadVerificador(connection);
                 query = new ActividadUpdate(connection);
                 break;
             case ASISTENCIA:
