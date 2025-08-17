@@ -15,7 +15,6 @@ import java.sql.SQLException;
  */
 public class EventoVerificador extends VerificadorEnDB {
 
-    private static final String SELECT_EVENTO = "SELECT * FROM evento WHERE codigo = ? ";
     public EventoVerificador(Connection connection) {
         super(connection);
     }
@@ -23,17 +22,14 @@ public class EventoVerificador extends VerificadorEnDB {
     @Override
     public void verificarValidezConsulta(String[] parametros) throws ExceptionEnDB {
         String codigo = parametros[0];
-        
-        try (PreparedStatement ps = connection.prepareStatement(SELECT_EVENTO);) {
-            ps.setString(1, codigo);
-
-            ResultSet resultSet = ps.executeQuery();
-            if(resultSet.next()){ // si encuentra el codigo
-                throw new ExceptionEnDB("El evento con codigo "+codigo+" ya existe!");
+        try {
+            ResultSet result = this.buscarEvento(codigo);
+            if(result.next()){ // si lo encuentra duplicado
+                throw new ExceptionEnDB("El evento con codigo " + codigo + " ya existe!");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new ExceptionEnDB(" Hubo un error al realizar la consulta!");
+            throw new ExceptionEnDB(" Hubo un error al realizar la consulta!"); // caso extremo
         }
     }
 

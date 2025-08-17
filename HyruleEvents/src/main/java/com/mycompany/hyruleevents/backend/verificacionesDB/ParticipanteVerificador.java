@@ -14,8 +14,6 @@ import java.sql.SQLException;
  * @author edu
  */
 public class ParticipanteVerificador extends VerificadorEnDB {
-
-    private static final String SELECT_PARTICIPANTE = "SELECT * FROM participante WHERE correo_electronico = ? ";
     
     public ParticipanteVerificador(Connection connection) {
         super(connection);
@@ -25,11 +23,9 @@ public class ParticipanteVerificador extends VerificadorEnDB {
     public void verificarValidezConsulta(String[] parametros) throws ExceptionEnDB {
         String correo = parametros[3];
         
-        try (PreparedStatement ps = connection.prepareStatement(SELECT_PARTICIPANTE);) {
-            ps.setString(1, correo);
-
-            ResultSet resultSet = ps.executeQuery();
-            if(resultSet.next()){ // si encuentra el codigo
+        try  {
+            ResultSet resultSet = this.buscarParticipante(correo);
+            if(resultSet.next()){ // si encuentra el participante
                 throw new ExceptionEnDB("El participante con correo "+correo+" ya existe!");
             }
         } catch (SQLException ex) {

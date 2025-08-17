@@ -24,9 +24,22 @@ public class InscripcionVerificador extends VerificadorEnDB {
 
     @Override
     public void verificarValidezConsulta(String[] parametros) throws ExceptionEnDB {
-        
          String correo = parametros[0];
          String codigo_evento = parametros[1];
+         
+        try {
+            ResultSet resultParticipante = this.buscarParticipante(correo);
+            if(!resultParticipante.next()){ // si no lo encuentra
+                throw new ExceptionEnDB(" No se encontró el participante en los registros");
+            }
+            
+            ResultSet resultEvento = this.buscarEvento(codigo_evento);
+            if(!resultEvento.next()){// si no encuentra el evento
+                throw new ExceptionEnDB(" No se encontró el evento con codigo "+ codigo_evento);
+            }
+        } catch (SQLException e) {
+            throw new ExceptionEnDB(" Hubo un error al realizar la consulta!");
+        }
         
         try (PreparedStatement ps = connection.prepareStatement(SELECT_PARTICIPANTE);) {
             ps.setString(1, correo);
