@@ -61,6 +61,28 @@ public class ActividadVerificador extends VerificadorEnDB {
         } catch (SQLException e) {
             throw new ExceptionEnDB(" Hubo un error al realizar la consulta!"); // caso extremo
         }
+        
+        // para verificar el ponente
+        try(PreparedStatement ps = connection.prepareStatement(SELECT_PARTICIPANTE)) {
+            String tipoDeParticipante;
+            ps.setString(1, correoParticipante);
+            ResultSet rs = ps.executeQuery();
+            if(!rs.next()){
+                throw new ExceptionEnDB("No se encontró el participante con correo"+ correoParticipante);
+            }else{
+                tipoDeParticipante = rs.getString("tipo_de_participante"); // obtener los cupos
+            }
+            
+            if(String.valueOf(tipoDeParticipante).equals("ASISTENTE")){
+                throw new ExceptionEnDB("Un asistente no puede impartir una actividad! ");
+                       
+            }
+        } catch (SQLException e) {
+            throw new ExceptionEnDB(" Hubo un error al realizar la consulta!"); // caso extremo
+        }
+        
+        
+        
     }
 
 }
