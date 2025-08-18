@@ -4,7 +4,10 @@
  */
 package com.mycompany.hyruleevents.backend.consultas;
 
+import com.mycompany.hyruleevents.backend.EscritorDeReportes;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -13,20 +16,25 @@ import java.sql.SQLException;
  */
 public class ReporteParticipantes extends ConsultaSQL {
 
-    private static final String SELECT_INSCRIPCION = "SELECT * FROM inscripcion"
-            + " WHERE codigo_evento = ?"
-            + " JOIN participante on inscripcion.correo_participante = participante.correo_electronico";
+    private static final String SELECT_INSCRIPCION = 
+    "SELECT * " +
+    "FROM inscripcion " +
+    "JOIN participante ON participante.correo_electronico = inscripcion.correo_participante " +
+    "WHERE inscripcion.codigo_evento = ?";
 
-    private static final String FILTRO_TIPO = " AND participante.tipo_de_participante = ?";
+    private static final String FILTRO_TIPO = " participante.tipo_de_participante = ?";
 
-    private static final String FILTRO_PROCENDENCIA = " AND participante.institucion_de_procedencia = ?";
+    private static final String FILTRO_PROCENDENCIA = " participante.institucion_de_procedencia = ?";
 
-    private static final String SELECT_INSCRIPCION_TIPO = SELECT_INSCRIPCION + FILTRO_TIPO;// por tipo
-    private static final String SELECT_INSCRIPCION_PROCEDENCIA = SELECT_INSCRIPCION + FILTRO_PROCENDENCIA; // por procedencia
-    private static final String SELECT_INSCRIPCION_AMBOS_FILTROS = SELECT_INSCRIPCION + FILTRO_TIPO + FILTRO_PROCENDENCIA; // todos los filtros
+    private static final String SELECT_INSCRIPCION_TIPO = SELECT_INSCRIPCION + " AND " + FILTRO_TIPO;// por tipo
+    private static final String SELECT_INSCRIPCION_PROCEDENCIA = SELECT_INSCRIPCION + " AND " + FILTRO_PROCENDENCIA; // por procedencia
+    private static final String SELECT_INSCRIPCION_AMBOS_FILTROS = SELECT_INSCRIPCION + " AND " + FILTRO_TIPO + " AND " + FILTRO_PROCENDENCIA; // todos los filtros
 
-    public ReporteParticipantes(Connection connection) {
+    private EscritorDeReportes escritor;
+
+    public ReporteParticipantes(EscritorDeReportes escritorDeReportes, Connection connection) {
         super(connection);
+        this.escritor = escritorDeReportes;
     }
 
     @Override
@@ -41,18 +49,57 @@ public class ReporteParticipantes extends ConsultaSQL {
         boolean hayTodosLosFiltros = !tipoParticipante.isBlank() && !institucionProcedencia.isBlank();
 
         if (noHayFiltro) { // si no hay ningun filtro hacer normal
-
+            generarSinFiltros(codigoEvento);
         } else if (soloHayFiltroParticipante) { // si hay filtro de participante
-
+            filtrarPorTipo(codigoEvento, tipoParticipante);
         } else if (soloHayFiltroProcedencia) { // si hay filtro de  procedencia
-
+            filtarPorProcedencia(codigoEvento, institucionProcedencia);
         } else if (hayTodosLosFiltros) { // si hay dos filtros
-
+            aplicarTodosLosFiltros(codigoEvento, tipoParticipante, institucionProcedencia);
         }
-        
-        
+
         // solo el insert cambia, todos los atributos son los mismos solo el inset cambia!
     }
-    
-    
+
+    private void generarSinFiltros(String codigoEvento) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_INSCRIPCION)) {
+            ps.setString(1, codigoEvento);
+            ResultSet rs = ps.executeQuery();
+            escritor.escribirReporteParticipantes(rs, codigoEvento);
+        }
+    }
+
+    private void filtrarPorTipo(String codigoEvento, String tipoParticipante) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_INSCRIPCION_TIPO)) {
+            ps.setString(1, codigoEvento);
+            ps.setString(2, tipoParticipante);
+
+            ResultSet rs = ps.executeQuery();
+            escritor.escribirReporteParticipantes(rs, codigoEvento);
+        }
+
+    }
+
+    private void filtarPorProcedencia(String codigoEvento, String procedencia) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_INSCRIPCION_PROCEDENCIA)) {
+            ps.setString(1, codigoEvento);
+            ps.setString(2, procedencia);
+
+            ResultSet rs = ps.executeQuery();
+            escritor.escribirReporteParticipantes(rs, codigoEvento);
+        }
+
+    }
+
+    private void aplicarTodosLosFiltros(String codigoEvento, String tipoParticipante, String procedencia) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_INSCRIPCION_AMBOS_FILTROS)) {
+            ps.setString(1, codigoEvento);
+            ps.setString(2, tipoParticipante);
+            ps.setString(3, procedencia);
+
+            ResultSet rs = ps.executeQuery();
+            escritor.escribirReporteParticipantes(rs, codigoEvento);
+        }
+    }
+
 }
