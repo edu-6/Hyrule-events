@@ -90,6 +90,51 @@ public abstract class ValidadorDeInstruccion {
 
         return parametros; // devuelve los parametros limpios
     }
+    
+    /**
+     * Verifica los parametros para el frontedn sin tener 
+     * que revisar linea por linea sino que solo parametross
+     */
+    public void verificaParametrosFrontend(String [] parametros) throws InstruccionException{
+        
+        if (hayCamposVacios(parametros)) {
+            logs = " Hay campos vacios que son obligatorios para " + this.nombreDeInstruccion;
+             throw new InstruccionException(logs);
+        }
+        
+        if (!tiposDeDatoValidos(parametros)) {
+             logs = " Hay erorres en los tipos de dato\n" + "Por favor ingrese decimales o enteros donde es requerido";
+            throw new InstruccionException(logs);
+        }
+        
+        if (!parametrosEspecialesValidos(parametros)) {
+            throw new InstruccionException(logs);
+        }
+    }
+    
+    /**
+     * Verifica que los datos sean o enteros o decimales
+     * @param parametros
+     * @return 
+     */
+    private boolean tiposDeDatoValidos(String [] parametros){
+         boolean valido = true;
+        for (int i = 0; i < parametros.length; i++) {
+            switch (tiposDeParametro[i]) {
+                case Parametro.ENTERO:
+                    if (!esEnteroValido(parametros[i])) {
+                        valido = false;
+                    }
+                    break;
+                case Parametro.DECIMAL:
+                    if (!esDecimalValido(parametros[i])) {
+                        valido = false;
+                    }
+                    break;
+            }
+        }
+        return valido;
+    }
 
     protected boolean parametrosCompletos(String instruccion) {
         int cantidadComas = 0;
