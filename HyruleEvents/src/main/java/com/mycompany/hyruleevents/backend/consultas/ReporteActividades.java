@@ -4,6 +4,7 @@
  */
 package com.mycompany.hyruleevents.backend.consultas;
 
+import com.mycompany.hyruleevents.backend.EscritorDeReportes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
 public class ReporteActividades extends ConsultaSQL {
 
     private static final String SELECT_ACTIVIDADES = "SELECT * FROM actividad"
-            + "JOIN participante on  correo_electronico = correo_del_poniente WHERE codigo_evento = ?  ";
+            + " JOIN participante on  correo_electronico = correo_del_poniente WHERE codigo_evento = ?  ";
 
     private static final String FILTRO_TIPO = " tipo_actividad = ?";
     private static final String FILTRO_CORREO = " correo_del_poniente = ?";
@@ -25,8 +26,11 @@ public class ReporteActividades extends ConsultaSQL {
     private static final String SELECT_FILTRO_CORREO = SELECT_ACTIVIDADES + " AND " + FILTRO_CORREO;
     private static final String SELECT_AMBOS_FILTROS = SELECT_ACTIVIDADES + " AND " + FILTRO_TIPO + " AND " + FILTRO_CORREO;
 
-    public ReporteActividades(Connection connection) {
+    
+    private EscritorDeReportes escritor;
+    public ReporteActividades(EscritorDeReportes escritor,Connection connection) {
         super(connection);
+        this.escritor = escritor;
     }
 
     @Override
@@ -41,34 +45,51 @@ public class ReporteActividades extends ConsultaSQL {
         boolean hayAmbosFiltros = !tipoActividad.isBlank() && !correoPoniente.isBlank();
 
         if (noHayFiltro) {
-            generarSinFiltros();
+            generarSinFiltros(codigoEvento);
         }else if (soloHayFiltroActividad) {
-            filtrarPorTipoActividad();
+            filtrarPorTipoActividad(codigoEvento, tipoActividad);
         }else if (soloHayFiltroCorreo) {
-            filtrarPorCorreo();
+            filtrarPorCorreo(codigoEvento, correoPoniente);
         }else if (hayAmbosFiltros) {
-            aplicarTodosLosFiltros();
+            aplicarTodosLosFiltros(codigoEvento, tipoActividad, correoPoniente);
         }
 
     }
     
-    private void generarSinFiltros(String codigoEVento) throws SQLException{
+    private void generarSinFiltros(String codigoEvento) throws SQLException{
         try (PreparedStatement ps = connection.prepareStatement(SELECT_ACTIVIDADES)) {
-            ps.setString(1, codigoEVento);
+            ps.setString(1, codigoEvento);
             ResultSet rs = ps.executeQuery();
-            escritor.escribirReporteParticipantes(rs, codigoEvento);
+            escritor.escribirReporteActividades(rs,codigoEvento);
         }
         
     }
-    private void filtrarPorTipoActividad() throws SQLException{
+    private void filtrarPorTipoActividad(String codigoEvento, String tipoActividad) throws SQLException{
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_FILTRO_TIPO)) {
+            ps.setString(1, codigoEvento);
+            ps.setString(2, tipoActividad);
+            ResultSet rs = ps.executeQuery();
+            escritor.escribirReporteActividades(rs, codigoEvento);
+        }
         
     }
-    private void filtrarPorCorreo() throws SQLException {
-        
+    private void filtrarPorCorreo(String codigoEvento, String correoPoniente) throws SQLException {
+         try (PreparedStatement ps = connection.prepareStatement(SELECT_FILTRO_CORREO)) {
+            ps.setString(1, codigoEvento);
+            ps.setString(2, correoPoniente);
+            ResultSet rs = ps.executeQuery();
+            escritor.escribirReporteActividades(rs,codigoEvento);
+        }
     }
     
-    private void aplicarTodosLosFiltros() throws SQLException{
-        
+    private void aplicarTodosLosFiltros(String codigoEvento, String tipoActividad, String correoPoniente) throws SQLException{
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_AMBOS_FILTROS)) {
+            ps.setString(1, codigoEvento);
+            ps.setString(2, tipoActividad);
+            ps.setString(3, correoPoniente);
+            ResultSet rs = ps.executeQuery();
+            escritor.escribirReporteActividades(rs,codigoEvento);
+        }
     }
 
 }

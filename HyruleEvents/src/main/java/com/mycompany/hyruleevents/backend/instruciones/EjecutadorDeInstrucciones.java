@@ -14,6 +14,7 @@ import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.InscripcionUpdate;
 import com.mycompany.hyruleevents.backend.consultas.PagoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.ParticipanteUpdate;
+import com.mycompany.hyruleevents.backend.consultas.ReporteActividades;
 import com.mycompany.hyruleevents.backend.consultas.ReporteParticipantes;
 import com.mycompany.hyruleevents.backend.consultas.ValidarInscripcion;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.CertificadoValidacion;
@@ -23,6 +24,7 @@ import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarActi
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarAsistenciaValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.ReporteActividadesValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ReporteParticipantesValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ActividadVerificador;
@@ -177,6 +179,8 @@ public class EjecutadorDeInstrucciones implements Runnable {
                 System.out.println("reporte de participantes");
                 break;
             case REPORTE_ACTIVIDADES:
+                validadorParametros = new ReporteActividadesValidador();
+                query = new ReporteActividades(escritorDeReportes,connection);
                 System.out.println("reporte de actividades");
                 break;
             case REPORTE_EVENTOS:
