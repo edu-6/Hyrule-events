@@ -5,6 +5,8 @@
 package com.mycompany.hyruleevents.backend;
 
 import com.mycompany.hyruleevents.backend.consultas.ActividadUpdate;
+import com.mycompany.hyruleevents.backend.consultas.AsistenciaUpdate;
+import com.mycompany.hyruleevents.backend.consultas.CertificadoMaker;
 import com.mycompany.hyruleevents.backend.consultas.ConsultaSQL;
 import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.InscripcionUpdate;
@@ -13,18 +15,22 @@ import com.mycompany.hyruleevents.backend.consultas.ParticipanteUpdate;
 import com.mycompany.hyruleevents.backend.consultas.ValidarInscripcion;
 import com.mycompany.hyruleevents.backend.instruciones.InstruccionException;
 import com.mycompany.hyruleevents.backend.instruciones.ValidadorDeInstruccion;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.CertificadoValidacion;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.InscripcionValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.PagoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarActividadValidador;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarAsistenciaValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ActividadVerificador;
+import com.mycompany.hyruleevents.backend.verificacionesDB.CertificadoVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.EventoVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ExceptionEnDB;
 import com.mycompany.hyruleevents.backend.verificacionesDB.InscripcionVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.PagoVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ParticipanteVerificador;
+import com.mycompany.hyruleevents.backend.verificacionesDB.RegsitroAsistenciaVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ValidarInscripcionVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.VerificadorEnDB;
 import java.sql.Connection;
@@ -42,11 +48,14 @@ public class EjecutadorDeInstruccionesFrontend {
     private ValidadorDeInstruccion validadorParametros;
     private VerificadorEnDB verificadorDB;
     private ConsultaSQL query;
+    private EscritorDeReportes escritorReportes;
 
     public EjecutadorDeInstruccionesFrontend(GestorDeArchivos gestorDeArchivos, DBConnection dbConexion) {
         this.gestorDeArchivos = gestorDeArchivos;
         this.dbConexion = dbConexion;
         this.connection = dbConexion.getConnection();
+        
+        this.escritorReportes = new EscritorDeReportes(gestorDeArchivos);
     }
 
     public void registrarEvento(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
@@ -94,6 +103,22 @@ public class EjecutadorDeInstruccionesFrontend {
         validadorParametros = new RegistrarActividadValidador();
         verificadorDB = new ActividadVerificador (connection);
         query = new ActividadUpdate(connection);
+        ejecutarConsulta(parametros);
+
+    }
+    
+     public void registrarAsistencia(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
+        validadorParametros = new RegistrarAsistenciaValidador();
+        verificadorDB = new RegsitroAsistenciaVerificador (connection);
+        query = new AsistenciaUpdate(connection);
+        ejecutarConsulta(parametros);
+
+    }
+     
+     public void generarCertificado(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
+        validadorParametros = new CertificadoValidacion();
+        verificadorDB = new CertificadoVerificador (connection);
+        query = new CertificadoMaker(escritorReportes,connection);
         ejecutarConsulta(parametros);
 
     }

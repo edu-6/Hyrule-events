@@ -56,15 +56,21 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="actividadMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu9">
+        <Menu class="javax.swing.JMenu" name="asistencia">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jMenu9"/>
+            <Property name="text" type="java.lang.String" value="Asistencia"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="asistenciaMouseClicked"/>
+          </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu10">
+        <Menu class="javax.swing.JMenu" name="certificado">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jMenu10"/>
+            <Property name="text" type="java.lang.String" value="Certificado"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="certificadoMouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>
@@ -116,7 +122,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="585" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="765" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

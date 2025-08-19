@@ -6,6 +6,7 @@ package com.mycompany.hyruleevents.fronted.consultas;
 
 import com.mycompany.hyruleevents.backend.EjecutadorDeInstruccionesFrontend;
 import java.awt.BorderLayout;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.awt.BorderLayout;
 public class ConsultasFrame extends javax.swing.JFrame {
 
     private EjecutadorDeInstruccionesFrontend ejecutador;
+
     /**
      * Creates new form NewJFrame
      */
@@ -23,20 +25,25 @@ public class ConsultasFrame extends javax.swing.JFrame {
         this.ejecutador = ejecutador;
     }
 
-    
-    public void limpiarDesktopPane(){
+    public void limpiarDesktopPane() {
         this.desktopPane.removeAll();
         this.desktopPane.revalidate();
         this.desktopPane.repaint();
     }
-    
-    
-    private void refrescarTodo(){
+
+    private void refrescarTodo() {
         this.desktopPane.revalidate();
         this.desktopPane.repaint();
         this.revalidate();
         this.repaint();
     }
+
+    private void añadirFram(JInternalFrame registro) {
+        registro.setVisible(true);
+        this.desktopPane.add(registro, BorderLayout.CENTER);
+        this.refrescarTodo();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,8 +61,8 @@ public class ConsultasFrame extends javax.swing.JFrame {
         pago = new javax.swing.JMenu();
         validarInscripcion = new javax.swing.JMenu();
         actividad = new javax.swing.JMenu();
-        jMenu9 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
+        asistencia = new javax.swing.JMenu();
+        certificado = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +72,7 @@ public class ConsultasFrame extends javax.swing.JFrame {
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 585, Short.MAX_VALUE)
+            .addGap(0, 765, Short.MAX_VALUE)
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,11 +133,21 @@ public class ConsultasFrame extends javax.swing.JFrame {
         });
         jMenuBar2.add(actividad);
 
-        jMenu9.setText("jMenu9");
-        jMenuBar2.add(jMenu9);
+        asistencia.setText("Asistencia");
+        asistencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                asistenciaMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(asistencia);
 
-        jMenu10.setText("jMenu10");
-        jMenuBar2.add(jMenu10);
+        certificado.setText("Certificado");
+        certificado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                certificadoMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(certificado);
 
         setJMenuBar(jMenuBar2);
 
@@ -152,56 +169,56 @@ public class ConsultasFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cosasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cosasActionPerformed
-       
+
     }//GEN-LAST:event_cosasActionPerformed
 
     private void cosasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cosasMouseClicked
         this.desktopPane.removeAll();
         RegistroEventoFrame registro = new RegistroEventoFrame(ejecutador, this);
-        registro.setVisible(true);
-        this.desktopPane.add(registro, BorderLayout.CENTER);
-        this.refrescarTodo();
+        this.añadirFram(registro);
     }//GEN-LAST:event_cosasMouseClicked
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
-       this.desktopPane.removeAll();
+        this.desktopPane.removeAll();
         RegistroParticipanteFrame registro = new RegistroParticipanteFrame(ejecutador, this);
-        registro.setVisible(true);
-        this.desktopPane.add(registro, BorderLayout.CENTER);
-        this.refrescarTodo();
+        this.añadirFram(registro);
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void inscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inscripcionMouseClicked
         this.desktopPane.removeAll();
         RegistroInscripcion registro = new RegistroInscripcion(ejecutador, this);
-        registro.setVisible(true);
-        this.desktopPane.add(registro, BorderLayout.CENTER);
-        this.refrescarTodo();
+        this.añadirFram(registro);
     }//GEN-LAST:event_inscripcionMouseClicked
 
     private void pagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagoMouseClicked
-         this.desktopPane.removeAll();
+        this.desktopPane.removeAll();
         PagoFrame registro = new PagoFrame(ejecutador, this);
-        registro.setVisible(true);
-        this.desktopPane.add(registro, BorderLayout.CENTER);
-        this.refrescarTodo();
+        this.añadirFram(registro);
     }//GEN-LAST:event_pagoMouseClicked
 
     private void validarInscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_validarInscripcionMouseClicked
         this.desktopPane.removeAll();
         ValidarInscripcionFrame registro = new ValidarInscripcionFrame(ejecutador, this);
-        registro.setVisible(true);
-        this.desktopPane.add(registro, BorderLayout.CENTER);
-        this.refrescarTodo();
+        this.añadirFram(registro);
     }//GEN-LAST:event_validarInscripcionMouseClicked
 
     private void actividadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actividadMouseClicked
         this.desktopPane.removeAll();
         RegistroActividad registro = new RegistroActividad(ejecutador, this);
-        registro.setVisible(true);
-        this.desktopPane.add(registro, BorderLayout.CENTER);
-        this.refrescarTodo();
+        this.añadirFram(registro);
     }//GEN-LAST:event_actividadMouseClicked
+
+    private void asistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_asistenciaMouseClicked
+        this.desktopPane.removeAll();
+        RegistroAsistenciaFrame registro = new RegistroAsistenciaFrame(ejecutador, this);
+        this.añadirFram(registro);
+    }//GEN-LAST:event_asistenciaMouseClicked
+
+    private void certificadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_certificadoMouseClicked
+        this.desktopPane.removeAll();
+        CertificadoFrame registro = new CertificadoFrame(ejecutador,this);
+        this.añadirFram(registro);
+    }//GEN-LAST:event_certificadoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -209,12 +226,12 @@ public class ConsultasFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu actividad;
+    private javax.swing.JMenu asistencia;
+    private javax.swing.JMenu certificado;
     private javax.swing.JMenu cosas;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu inscripcion;
-    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu pago;
     private javax.swing.JMenu validarInscripcion;

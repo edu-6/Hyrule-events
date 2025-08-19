@@ -56,7 +56,9 @@ public class ActividadVerificador extends VerificadorEnDB {
             
             if(cuposParaActividades < cuposNecesariosActividad){
                 throw new ExceptionEnDB("Los cupos de la actividad superan "
-                        +"\n"+ "a los cupos disponibles para actividades en el evento");
+                        +"\n"+ "a los cupos disponibles para actividades en el evento\n"
+                        + "Cupos disponibles para actividades: "+ cuposParaActividades+"\n"
+                                + "Cupos que ocupará la actividad: "+ cuposNecesariosActividad);
             }
         } catch (SQLException e) {
             throw new ExceptionEnDB(" Hubo un error al realizar la consulta!"); // caso extremo
