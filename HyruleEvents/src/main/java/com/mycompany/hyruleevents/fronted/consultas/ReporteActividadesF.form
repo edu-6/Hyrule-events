@@ -35,10 +35,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel1" max="32767" attributes="0"/>
-                  <Component id="procedenciaL" max="32767" attributes="0"/>
+                  <Component id="correoEncargadoL" max="32767" attributes="0"/>
                   <Component id="btnContinuar" alignment="0" max="32767" attributes="0"/>
                   <Component id="codigoEventoL" max="32767" attributes="0"/>
-                  <Component id="tipoParticipanteL" alignment="0" max="32767" attributes="0"/>
+                  <Component id="tipoActividadL" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -56,11 +56,11 @@
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                  <Component id="tipoParticipanteL" min="-2" max="-2" attributes="0"/>
+                  <Component id="tipoActividadL" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="48" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="procedenciaL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="correoEncargadoL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="36" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Reporte participante"/>
+        <Property name="text" type="java.lang.String" value="Reporte Actividades"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -92,12 +92,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Lugar de procedencia:"/>
+        <Property name="text" type="java.lang.String" value="Correo del encargado:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="procedenciaL">
+    <Component class="javax.swing.JTextField" name="correoEncargadoL">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="procedenciaLActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="correoEncargadoLActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnContinuar">
@@ -126,12 +126,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tipo de participante"/>
+        <Property name="text" type="java.lang.String" value="Tipo de actividad:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tipoParticipanteL">
+    <Component class="javax.swing.JTextField" name="tipoActividadL">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipoParticipanteLActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipoActividadLActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author edu
  */
-public class ReporteParticipantesFrame extends javax.swing.JInternalFrame {
+public class ReporteActividadesF extends javax.swing.JInternalFrame {
 
      private EjecutadorDeInstruccionesFrontend ejecutador;
      private ConsultasFrame framePadre;
     /**
      * Creates new form NewJInternalFrame
      */
-    public ReporteParticipantesFrame(EjecutadorDeInstruccionesFrontend ejecutador, ConsultasFrame framePadre) {
+    public ReporteActividadesF(EjecutadorDeInstruccionesFrontend ejecutador, ConsultasFrame framePadre) {
         initComponents();
         this.ejecutador = ejecutador;
         this.framePadre = framePadre;
@@ -41,27 +41,27 @@ public class ReporteParticipantesFrame extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        procedenciaL = new javax.swing.JTextField();
+        correoEncargadoL = new javax.swing.JTextField();
         btnContinuar = new javax.swing.JButton();
         codigoEventoL = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        tipoParticipanteL = new javax.swing.JTextField();
+        tipoActividadL = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(225, 218, 193));
         setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jLabel1.setText("Reporte participante");
+        jLabel1.setText("Reporte Actividades");
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel2.setText("Codigo del evento:");
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel5.setText("Lugar de procedencia:");
+        jLabel5.setText("Correo del encargado:");
 
-        procedenciaL.addActionListener(new java.awt.event.ActionListener() {
+        correoEncargadoL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                procedenciaLActionPerformed(evt);
+                correoEncargadoLActionPerformed(evt);
             }
         });
 
@@ -81,11 +81,11 @@ public class ReporteParticipantesFrame extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel8.setText("Tipo de participante");
+        jLabel8.setText("Tipo de actividad:");
 
-        tipoParticipanteL.addActionListener(new java.awt.event.ActionListener() {
+        tipoActividadL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoParticipanteLActionPerformed(evt);
+                tipoActividadLActionPerformed(evt);
             }
         });
 
@@ -102,10 +102,10 @@ public class ReporteParticipantesFrame extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(procedenciaL)
+                    .addComponent(correoEncargadoL)
                     .addComponent(btnContinuar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(codigoEventoL)
-                    .addComponent(tipoParticipanteL))
+                    .addComponent(tipoActividadL))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,10 +119,10 @@ public class ReporteParticipantesFrame extends javax.swing.JInternalFrame {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
-                    .addComponent(tipoParticipanteL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tipoActividadL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(procedenciaL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(correoEncargadoL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(58, 58, 58)
                 .addComponent(btnContinuar)
@@ -132,19 +132,19 @@ public class ReporteParticipantesFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void procedenciaLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procedenciaLActionPerformed
+    private void correoEncargadoLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoEncargadoLActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_procedenciaLActionPerformed
+    }//GEN-LAST:event_correoEncargadoLActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         String codigoEvento = this.codigoEventoL.getText();
-        String tipoDeParticipante = this.tipoParticipanteL.getText();
-        String procedencia = this.procedenciaL.getText();
+        String tipoActividad = this.tipoActividadL.getText();
+        String corrreoEncargado = this.correoEncargadoL.getText();
         
-        String [] parametros = {codigoEvento,tipoDeParticipante,procedencia};
+        String [] parametros = {codigoEvento,tipoActividad,corrreoEncargado};
         boolean todoBien = true;
          try {
-             this.ejecutador.generarReporteParticipantes(parametros);
+             this.ejecutador.generarReporteActividades(parametros);
          } catch (InstruccionException ex) {
              JOptionPane.showMessageDialog(this, ex.getMessage());
              todoBien = false;
@@ -168,19 +168,19 @@ public class ReporteParticipantesFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoEventoLActionPerformed
 
-    private void tipoParticipanteLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoParticipanteLActionPerformed
+    private void tipoActividadLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActividadLActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tipoParticipanteLActionPerformed
+    }//GEN-LAST:event_tipoActividadLActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JTextField codigoEventoL;
+    private javax.swing.JTextField correoEncargadoL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField procedenciaL;
-    private javax.swing.JTextField tipoParticipanteL;
+    private javax.swing.JTextField tipoActividadL;
     // End of variables declaration//GEN-END:variables
 }

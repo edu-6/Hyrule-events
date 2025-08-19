@@ -12,6 +12,8 @@ import com.mycompany.hyruleevents.backend.consultas.EventoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.InscripcionUpdate;
 import com.mycompany.hyruleevents.backend.consultas.PagoUpdate;
 import com.mycompany.hyruleevents.backend.consultas.ParticipanteUpdate;
+import com.mycompany.hyruleevents.backend.consultas.ReporteActividades;
+import com.mycompany.hyruleevents.backend.consultas.ReporteParticipantes;
 import com.mycompany.hyruleevents.backend.consultas.ValidarInscripcion;
 import com.mycompany.hyruleevents.backend.instruciones.InstruccionException;
 import com.mycompany.hyruleevents.backend.instruciones.ValidadorDeInstruccion;
@@ -22,6 +24,8 @@ import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarActi
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistrarAsistenciaValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeEventoValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.RegistroDeParticipanteValidador;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.ReporteActividadesValidador;
+import com.mycompany.hyruleevents.backend.instruciones.validadores.ReporteParticipantesValidador;
 import com.mycompany.hyruleevents.backend.instruciones.validadores.ValidarInscripcionValidador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.ActividadVerificador;
 import com.mycompany.hyruleevents.backend.verificacionesDB.CertificadoVerificador;
@@ -54,7 +58,7 @@ public class EjecutadorDeInstruccionesFrontend {
         this.gestorDeArchivos = gestorDeArchivos;
         this.dbConexion = dbConexion;
         this.connection = dbConexion.getConnection();
-        
+
         this.escritorReportes = new EscritorDeReportes(gestorDeArchivos);
     }
 
@@ -65,60 +69,73 @@ public class EjecutadorDeInstruccionesFrontend {
         ejecutarConsulta(parametros);
 
     }
-    
+
     public void registrarParticipante(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
         validadorParametros = new RegistroDeParticipanteValidador();
-        verificadorDB = new ParticipanteVerificador (connection);
+        verificadorDB = new ParticipanteVerificador(connection);
         query = new ParticipanteUpdate(connection);
         ejecutarConsulta(parametros);
 
     }
-    
+
     public void registrarInscripcion(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
         validadorParametros = new InscripcionValidador();
-        verificadorDB = new InscripcionVerificador (connection);
+        verificadorDB = new InscripcionVerificador(connection);
         query = new InscripcionUpdate(connection);
         ejecutarConsulta(parametros);
 
     }
-    
+
     public void registrarPago(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
         validadorParametros = new PagoValidador();
-        verificadorDB = new PagoVerificador (connection);
+        verificadorDB = new PagoVerificador(connection);
         query = new PagoUpdate(connection);
         ejecutarConsulta(parametros);
 
     }
-    
-    
+
     public void validarInscripcion(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
         validadorParametros = new ValidarInscripcionValidador();
-        verificadorDB = new ValidarInscripcionVerificador (connection);
+        verificadorDB = new ValidarInscripcionVerificador(connection);
         query = new ValidarInscripcion(connection);
         ejecutarConsulta(parametros);
 
     }
-    
+
     public void registrarActividad(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
         validadorParametros = new RegistrarActividadValidador();
-        verificadorDB = new ActividadVerificador (connection);
+        verificadorDB = new ActividadVerificador(connection);
         query = new ActividadUpdate(connection);
         ejecutarConsulta(parametros);
 
     }
-    
-     public void registrarAsistencia(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
+
+    public void registrarAsistencia(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
         validadorParametros = new RegistrarAsistenciaValidador();
-        verificadorDB = new RegsitroAsistenciaVerificador (connection);
+        verificadorDB = new RegsitroAsistenciaVerificador(connection);
         query = new AsistenciaUpdate(connection);
         ejecutarConsulta(parametros);
 
     }
-     
-     public void generarCertificado(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
+
+    public void generarCertificado(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
         validadorParametros = new CertificadoValidacion();
-        verificadorDB = new CertificadoVerificador (connection);
-        query = new CertificadoMaker(escritorReportes,connection);
+        verificadorDB = new CertificadoVerificador(connection);
+        query = new CertificadoMaker(escritorReportes, connection);
+        ejecutarConsulta(parametros);
+
+    }
+
+    public void generarReporteParticipantes(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
+        validadorParametros = new ReporteParticipantesValidador();
+        query = new ReporteParticipantes(escritorReportes, connection);
+        ejecutarConsulta(parametros);
+
+    }
+    
+    public void generarReporteActividades(String[] parametros) throws InstruccionException, SQLException, ExceptionEnDB {
+        validadorParametros = new ReporteActividadesValidador();
+        query = new ReporteActividades(escritorReportes, connection);
         ejecutarConsulta(parametros);
 
     }

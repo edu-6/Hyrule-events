@@ -63,6 +63,8 @@ public class ConsultasFrame extends javax.swing.JFrame {
         actividad = new javax.swing.JMenu();
         asistencia = new javax.swing.JMenu();
         certificado = new javax.swing.JMenu();
+        reporteParticipantes = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,12 +74,18 @@ public class ConsultasFrame extends javax.swing.JFrame {
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
+            .addGap(0, 877, Short.MAX_VALUE)
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 264, Short.MAX_VALUE)
         );
+
+        jMenuBar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuBar2MouseClicked(evt);
+            }
+        });
 
         cosas.setText("Evento");
         cosas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,6 +156,22 @@ public class ConsultasFrame extends javax.swing.JFrame {
             }
         });
         jMenuBar2.add(certificado);
+
+        reporteParticipantes.setText("Reporte Participante");
+        reporteParticipantes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reporteParticipantesMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(reporteParticipantes);
+
+        jMenu1.setText("Reporte actividades");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
 
@@ -220,6 +244,22 @@ public class ConsultasFrame extends javax.swing.JFrame {
         this.añadirFram(registro);
     }//GEN-LAST:event_certificadoMouseClicked
 
+    private void reporteParticipantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reporteParticipantesMouseClicked
+        this.desktopPane.removeAll();
+        ReporteParticipantesFrame registro = new ReporteParticipantesFrame(ejecutador,this);
+        this.añadirFram(registro);
+    }//GEN-LAST:event_reporteParticipantesMouseClicked
+
+    private void jMenuBar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBar2MouseClicked
+        
+    }//GEN-LAST:event_jMenuBar2MouseClicked
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        this.desktopPane.removeAll();
+        ReporteActividadesF registro = new ReporteActividadesF(ejecutador,this);
+        this.añadirFram(registro);
+    }//GEN-LAST:event_jMenu1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -231,9 +271,11 @@ public class ConsultasFrame extends javax.swing.JFrame {
     private javax.swing.JMenu cosas;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu inscripcion;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu pago;
+    private javax.swing.JMenu reporteParticipantes;
     private javax.swing.JMenu validarInscripcion;
     // End of variables declaration//GEN-END:variables
 }
