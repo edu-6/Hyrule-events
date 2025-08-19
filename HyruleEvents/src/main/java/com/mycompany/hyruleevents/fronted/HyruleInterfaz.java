@@ -28,7 +28,6 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     //Backend
     private GestorDeArchivos gestorDeArchivos;
     private DBConnection dbConexion;
-    private EjecutadorDeInstruccionesFrontend ejecutadorFrontend;
 
     /**
      * Creates new form HyruleInterfaz
@@ -98,8 +97,9 @@ public class HyruleInterfaz extends javax.swing.JFrame {
      
      
     public void mostrarFormulariosDeConsultas(){
+        EjecutadorDeInstruccionesFrontend ejecutador = new EjecutadorDeInstruccionesFrontend(gestorDeArchivos,dbConexion );
         this.setVisible(false);
-        ConsultasFrame frame = new ConsultasFrame();
+        ConsultasFrame frame = new ConsultasFrame(ejecutador);
         frame.setSize(this.getSize());
         frame.setLocationRelativeTo(this);
         frame.setResizable(true);

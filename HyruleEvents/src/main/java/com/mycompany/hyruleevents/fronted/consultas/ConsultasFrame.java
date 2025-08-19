@@ -4,6 +4,7 @@
  */
 package com.mycompany.hyruleevents.fronted.consultas;
 
+import com.mycompany.hyruleevents.backend.EjecutadorDeInstruccionesFrontend;
 import java.awt.BorderLayout;
 
 /**
@@ -12,14 +13,30 @@ import java.awt.BorderLayout;
  */
 public class ConsultasFrame extends javax.swing.JFrame {
 
+    private EjecutadorDeInstruccionesFrontend ejecutador;
     /**
      * Creates new form NewJFrame
      */
-    public ConsultasFrame() {
+    public ConsultasFrame(EjecutadorDeInstruccionesFrontend ejecutador) {
         initComponents();
         this.desktopPane.setLayout(new BorderLayout());
+        this.ejecutador = ejecutador;
     }
 
+    
+    public void limpiarDesktopPane(){
+        this.desktopPane.removeAll();
+        this.desktopPane.revalidate();
+        this.desktopPane.repaint();
+    }
+    
+    
+    private void refrescarTodo(){
+        this.desktopPane.revalidate();
+        this.desktopPane.repaint();
+        this.revalidate();
+        this.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,7 +72,7 @@ public class ConsultasFrame extends javax.swing.JFrame {
             .addGap(0, 264, Short.MAX_VALUE)
         );
 
-        cosas.setText("Cosas");
+        cosas.setText("Evento");
         cosas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cosasMouseClicked(evt);
@@ -69,7 +86,12 @@ public class ConsultasFrame extends javax.swing.JFrame {
         jMenuBar2.add(cosas);
 
         jMenu4.setBackground(new java.awt.Color(246, 176, 91));
-        jMenu4.setText("Edit");
+        jMenu4.setText("Participante");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
         jMenuBar2.add(jMenu4);
 
         jMenu5.setText("jMenu5");
@@ -115,14 +137,19 @@ public class ConsultasFrame extends javax.swing.JFrame {
 
     private void cosasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cosasMouseClicked
         this.desktopPane.removeAll();
-        RegistroEventoFrame registro = new RegistroEventoFrame();
+        RegistroEventoFrame registro = new RegistroEventoFrame(ejecutador, this);
         registro.setVisible(true);
         this.desktopPane.add(registro, BorderLayout.CENTER);
-        this.desktopPane.revalidate();
-        this.desktopPane.repaint();
-        this.revalidate();
-        this.repaint();
+        this.refrescarTodo();
     }//GEN-LAST:event_cosasMouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+       this.desktopPane.removeAll();
+        RegistroParticipanteFrame registro = new RegistroParticipanteFrame(ejecutador, this);
+        registro.setVisible(true);
+        this.desktopPane.add(registro, BorderLayout.CENTER);
+        this.refrescarTodo();
+    }//GEN-LAST:event_jMenu4MouseClicked
 
     /**
      * @param args the command line arguments

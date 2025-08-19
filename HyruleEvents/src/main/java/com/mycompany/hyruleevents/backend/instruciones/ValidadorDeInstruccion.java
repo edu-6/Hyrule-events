@@ -103,7 +103,8 @@ public abstract class ValidadorDeInstruccion {
         }
         
         if (!tiposDeDatoValidos(parametros)) {
-             logs = " Hay erorres en los tipos de dato\n" + "Por favor ingrese decimales o enteros donde es requerido";
+             logs = " Hay erorres en los tipos de dato\n" + "Por favor ingrese decimales o enteros donde es requerido\n"
+                     + "(Mayores a 0)";
             throw new InstruccionException(logs);
         }
         

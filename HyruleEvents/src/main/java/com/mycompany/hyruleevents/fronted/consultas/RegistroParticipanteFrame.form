@@ -26,31 +26,30 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="54" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel6" alignment="1" min="-2" pref="123" max="-2" attributes="0"/>
-                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="46" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel6" min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel1" max="32767" attributes="0"/>
-                  <Component id="fechaL" max="32767" attributes="0"/>
-                  <Component id="tituloLbl" max="32767" attributes="0"/>
-                  <Component id="tipoCombo" min="-2" max="-2" attributes="0"/>
-                  <Component id="cupoMaximoL" max="32767" attributes="0"/>
-                  <Component id="ubiacionL" max="32767" attributes="0"/>
+                  <Component id="tipoEstudianteL" min="-2" max="-2" attributes="0"/>
+                  <Component id="correoLbl" max="32767" attributes="0"/>
+                  <Component id="institucionLlb" max="32767" attributes="0"/>
                   <Component id="btnContinuar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="codigoLbl" max="32767" attributes="0"/>
-                  <Component id="costoLbl" alignment="0" max="32767" attributes="0"/>
+                  <Component id="nombreL" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,36 +60,21 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="codigoLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nombreL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                  <Component id="costoLbl" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tituloLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="fechaL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tipoCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tipoEstudianteL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="ubiacionL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="institucionLlb" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cupoMaximoL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="correoLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -114,40 +98,24 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Codigo: "/>
+        <Property name="text" type="java.lang.String" value="Nombre:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Liberation Sans" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Fecha :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tituloLbl">
-    </Component>
-    <Component class="javax.swing.JTextField" name="fechaL">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fechaLActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tipo:"/>
+        <Property name="text" type="java.lang.String" value="Tipo participante:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="tipoCombo">
+    <Component class="javax.swing.JComboBox" name="tipoEstudianteL">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="CHARLA"/>
-            <StringItem index="1" value="CONGRESO"/>
-            <StringItem index="2" value="TALLER"/>
-            <StringItem index="3" value="DEBATE"/>
+          <StringArray count="3">
+            <StringItem index="0" value="ESTUDIANTE"/>
+            <StringItem index="1" value="PROFESIONAL"/>
+            <StringItem index="2" value="INVITADO"/>
           </StringArray>
         </Property>
       </Properties>
@@ -160,12 +128,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ubicacion"/>
+        <Property name="text" type="java.lang.String" value="Institucion:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="cupoMaximoL">
+    <Component class="javax.swing.JTextField" name="correoLbl">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cupoMaximoLActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="correoLblActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -173,12 +141,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cupo maximo:"/>
+        <Property name="text" type="java.lang.String" value="correo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="ubiacionL">
+    <Component class="javax.swing.JTextField" name="institucionLlb">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ubiacionLActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="institucionLlbActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnContinuar">
@@ -197,30 +165,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnContinuarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Liberation Sans" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Titulo"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="codigoLbl">
+    <Component class="javax.swing.JTextField" name="nombreL">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="codigoLblActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Liberation Sans" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Costo"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="costoLbl">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="costoLblActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreLActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
