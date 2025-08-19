@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author edu
  */
-public class RegistroParticipanteFrame extends javax.swing.JInternalFrame {
+public class RegistroInscripcion extends javax.swing.JInternalFrame {
 
      private EjecutadorDeInstruccionesFrontend ejecutador;
      private ConsultasFrame framePadre;
     /**
      * Creates new form NewJInternalFrame
      */
-    public RegistroParticipanteFrame(EjecutadorDeInstruccionesFrontend ejecutador, ConsultasFrame framePadre) {
+    public RegistroInscripcion(EjecutadorDeInstruccionesFrontend ejecutador, ConsultasFrame framePadre) {
         initComponents();
         this.ejecutador = ejecutador;
         this.framePadre = framePadre;
@@ -41,45 +41,25 @@ public class RegistroParticipanteFrame extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        tipoEstudianteL = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        correoLbl = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        institucionLlb = new javax.swing.JTextField();
+        tipoInscripcionCombo = new javax.swing.JComboBox<>();
         btnContinuar = new javax.swing.JButton();
-        nombreL = new javax.swing.JTextField();
+        correoLbl = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        codigoEventoLb = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(225, 218, 193));
         setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jLabel1.setText("Registro participante");
+        jLabel1.setText("Registro Inscripcion");
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("correo del participante:");
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel4.setText("Tipo participante:");
+        jLabel4.setText("Tipo de inscripcion:");
 
-        tipoEstudianteL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTUDIANTE", "PROFESIONAL", "INVITADO" }));
-
-        jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel5.setText("Institucion:");
-
-        correoLbl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                correoLblActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel6.setText("correo");
-
-        institucionLlb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                institucionLlbActionPerformed(evt);
-            }
-        });
+        tipoInscripcionCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASISTENTE", "CONFERENCISTA", "TALLERISTA", "OTRO" }));
 
         btnContinuar.setBackground(new java.awt.Color(204, 204, 204));
         btnContinuar.setText("Continuar");
@@ -90,9 +70,18 @@ public class RegistroParticipanteFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        nombreL.addActionListener(new java.awt.event.ActionListener() {
+        correoLbl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreLActionPerformed(evt);
+                correoLblActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel8.setText("codigo del evento");
+
+        codigoEventoLb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoEventoLbActionPerformed(evt);
             }
         });
 
@@ -102,23 +91,17 @@ public class RegistroParticipanteFrame extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tipoEstudianteL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(correoLbl)
-                    .addComponent(institucionLlb)
+                    .addComponent(tipoInscripcionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnContinuar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nombreL))
+                    .addComponent(correoLbl)
+                    .addComponent(codigoEventoLb))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,45 +111,32 @@ public class RegistroParticipanteFrame extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(nombreL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(correoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(codigoEventoLb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tipoEstudianteL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tipoInscripcionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(institucionLlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(correoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(btnContinuar)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void correoLblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoLblActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_correoLblActionPerformed
-
-    private void institucionLlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_institucionLlbActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_institucionLlbActionPerformed
-
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        String nombre =  this.nombreL.getText();
-        String tipo =  this.tipoEstudianteL.getSelectedItem().toString();
-        String institucion =  this.institucionLlb.getText();
-        String correo =  this.nombreL.getText();
+        String correo = this.correoLbl.getText();
+        String codigoEvento = this.codigoEventoLb.getText();
+        String tipoInscripcion = this.tipoInscripcionCombo.getSelectedItem().toString();
         
-        String [] parametros = {nombre,tipo,institucion,correo};
+        String [] parametros = {correo,codigoEvento,tipoInscripcion};
         boolean todoBien = true;
          try {
-             this.ejecutador.registrarParticipante(parametros);
+             this.ejecutador.registrarInscripcion(parametros);
          } catch (InstruccionException ex) {
              JOptionPane.showMessageDialog(this, ex.getMessage());
              todoBien = false;
@@ -186,21 +156,23 @@ public class RegistroParticipanteFrame extends javax.swing.JInternalFrame {
              
     }//GEN-LAST:event_btnContinuarActionPerformed
 
-    private void nombreLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreLActionPerformed
+    private void correoLblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoLblActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nombreLActionPerformed
+    }//GEN-LAST:event_correoLblActionPerformed
+
+    private void codigoEventoLbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoEventoLbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigoEventoLbActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
+    private javax.swing.JTextField codigoEventoLb;
     private javax.swing.JTextField correoLbl;
-    private javax.swing.JTextField institucionLlb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField nombreL;
-    private javax.swing.JComboBox<String> tipoEstudianteL;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JComboBox<String> tipoInscripcionCombo;
     // End of variables declaration//GEN-END:variables
 }

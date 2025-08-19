@@ -50,10 +50,10 @@ public class ConsultasFrame extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         cosas = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
+        inscripcion = new javax.swing.JMenu();
+        pago = new javax.swing.JMenu();
+        validarInscripcion = new javax.swing.JMenu();
+        actividad = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
         jMenu10 = new javax.swing.JMenu();
 
@@ -94,17 +94,37 @@ public class ConsultasFrame extends javax.swing.JFrame {
         });
         jMenuBar2.add(jMenu4);
 
-        jMenu5.setText("jMenu5");
-        jMenuBar2.add(jMenu5);
+        inscripcion.setText("Inscripcion");
+        inscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inscripcionMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(inscripcion);
 
-        jMenu6.setText("jMenu6");
-        jMenuBar2.add(jMenu6);
+        pago.setText("Pago");
+        pago.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pagoMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(pago);
 
-        jMenu7.setText("jMenu7");
-        jMenuBar2.add(jMenu7);
+        validarInscripcion.setText("Validar inscripcion");
+        validarInscripcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                validarInscripcionMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(validarInscripcion);
 
-        jMenu8.setText("jMenu8");
-        jMenuBar2.add(jMenu8);
+        actividad.setText("Actividad");
+        actividad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                actividadMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(actividad);
 
         jMenu9.setText("jMenu9");
         jMenuBar2.add(jMenu9);
@@ -151,20 +171,52 @@ public class ConsultasFrame extends javax.swing.JFrame {
         this.refrescarTodo();
     }//GEN-LAST:event_jMenu4MouseClicked
 
+    private void inscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inscripcionMouseClicked
+        this.desktopPane.removeAll();
+        RegistroInscripcion registro = new RegistroInscripcion(ejecutador, this);
+        registro.setVisible(true);
+        this.desktopPane.add(registro, BorderLayout.CENTER);
+        this.refrescarTodo();
+    }//GEN-LAST:event_inscripcionMouseClicked
+
+    private void pagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagoMouseClicked
+         this.desktopPane.removeAll();
+        PagoFrame registro = new PagoFrame(ejecutador, this);
+        registro.setVisible(true);
+        this.desktopPane.add(registro, BorderLayout.CENTER);
+        this.refrescarTodo();
+    }//GEN-LAST:event_pagoMouseClicked
+
+    private void validarInscripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_validarInscripcionMouseClicked
+        this.desktopPane.removeAll();
+        ValidarInscripcionFrame registro = new ValidarInscripcionFrame(ejecutador, this);
+        registro.setVisible(true);
+        this.desktopPane.add(registro, BorderLayout.CENTER);
+        this.refrescarTodo();
+    }//GEN-LAST:event_validarInscripcionMouseClicked
+
+    private void actividadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actividadMouseClicked
+        this.desktopPane.removeAll();
+        RegistroActividad registro = new RegistroActividad(ejecutador, this);
+        registro.setVisible(true);
+        this.desktopPane.add(registro, BorderLayout.CENTER);
+        this.refrescarTodo();
+    }//GEN-LAST:event_actividadMouseClicked
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu actividad;
     private javax.swing.JMenu cosas;
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JMenu inscripcion;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenu pago;
+    private javax.swing.JMenu validarInscripcion;
     // End of variables declaration//GEN-END:variables
 }
