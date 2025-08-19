@@ -7,7 +7,10 @@ package com.mycompany.hyruleevents.fronted;
 import com.mycompany.hyruleevents.backend.instruciones.EjecutadorDeInstrucciones;
 import com.mycompany.hyruleevents.backend.CreadorDeTablas;
 import com.mycompany.hyruleevents.backend.DBConnection;
+import com.mycompany.hyruleevents.backend.EjecutadorDeInstruccionesFrontend;
 import com.mycompany.hyruleevents.backend.GestorDeArchivos;
+import com.mycompany.hyruleevents.fronted.consultas.ConsultasFrame;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.File;
 import javax.swing.JPanel;
@@ -21,10 +24,11 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     private LoginPanel loginPanel;
     private JPanel panelActual;
     private ConsolaDeTexto consola;
-
+    
     //Backend
     private GestorDeArchivos gestorDeArchivos;
     private DBConnection dbConexion;
+    private EjecutadorDeInstruccionesFrontend ejecutadorFrontend;
 
     /**
      * Creates new form HyruleInterfaz
@@ -38,7 +42,7 @@ public class HyruleInterfaz extends javax.swing.JFrame {
         this.panelActual = loginPanel;
         //this.add(loginPanel, BorderLayout.CENTER);
         this.añadirPanel(loginPanel);
-        this.consola = new ConsolaDeTexto();
+        this.consola = new ConsolaDeTexto(this);
         
         //Backend
         this.gestorDeArchivos = new GestorDeArchivos();
@@ -90,6 +94,16 @@ public class HyruleInterfaz extends javax.swing.JFrame {
     }
      public void setConexion(DBConnection conexion) {
         this.dbConexion = conexion;
+    }
+     
+     
+    public void mostrarFormulariosDeConsultas(){
+        this.setVisible(false);
+        ConsultasFrame frame = new ConsultasFrame();
+        frame.setSize(this.getSize());
+        frame.setLocationRelativeTo(this);
+        frame.setResizable(true);
+        frame.setVisible(true);
     }
 
 

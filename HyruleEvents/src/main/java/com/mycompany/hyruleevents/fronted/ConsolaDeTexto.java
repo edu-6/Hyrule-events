@@ -18,12 +18,13 @@ import javax.swing.JTextArea;
  */
 public class ConsolaDeTexto extends javax.swing.JPanel {
 
-    
     private JTextArea consola;
     private JScrollPane consolaPane;
     private JButton botonContinuar;
+    private HyruleInterfaz ventanaPrincipal;
 
-    public ConsolaDeTexto() {
+    public ConsolaDeTexto(HyruleInterfaz ventanaPrincipal) {
+        this.ventanaPrincipal = ventanaPrincipal;
         this.setLayout(new BorderLayout());
         this.setBackground(Color.ORANGE);
         this.setPreferredSize(new Dimension(1000, 600));
@@ -36,27 +37,34 @@ public class ConsolaDeTexto extends javax.swing.JPanel {
         botonContinuar.setBackground(Color.ORANGE);
         this.add(botonContinuar, BorderLayout.NORTH);
         this.botonContinuar.setEnabled(false);
-        
-        consolaPane = new JScrollPane(consola,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        consolaPane = new JScrollPane(consola, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(consolaPane, BorderLayout.CENTER);
+
+        botonContinuar.addActionListener(e -> {
+            solicitarCambioDeFrame();
+        });
     }
-    
-    public void setTexto(String texto){
-        String textoAnterior =consola.getText();
-        consola.setText(textoAnterior +"\n"+ texto);
+
+    public void setTexto(String texto) {
+        String textoAnterior = consola.getText();
+        consola.setText(textoAnterior + "\n" + texto);
     }
-    
-    public void activarBtnSiguente(){
+
+    public void activarBtnSiguente() {
         this.botonContinuar.setEnabled(true);
     }
-    
-    public void ponerTitulo(String nombreArchivo){
-        String titulo = "======================= NOMBRE DEL ARCHIVO: "+nombreArchivo+"=======================";
-        String espacio = "\n"+"\n"+"\n"+"\n";
+
+    public void ponerTitulo(String nombreArchivo) {
+        String titulo = "======================= NOMBRE DEL ARCHIVO: " + nombreArchivo + "=======================";
+        String espacio = "\n" + "\n" + "\n" + "\n";
         consola.setText(titulo + espacio);
     }
     
-    
+    private void solicitarCambioDeFrame(){
+        this.ventanaPrincipal.mostrarFormulariosDeConsultas();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
