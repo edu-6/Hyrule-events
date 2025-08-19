@@ -67,6 +67,9 @@ public class EscritorDeReportes {
         escribirArchivo(html, tituloEvento + "Participantes");
 
     }
+    
+    
+    public void escribirReporte
 
     public String agregarFilasParticipantes(ResultSet rs) throws SQLException {
 
@@ -90,6 +93,7 @@ public class EscritorDeReportes {
         }
         return filas;
     }
+    
 
     private void escribirArchivo(String contenido, String nombreArchivo) {
         try (FileWriter writer = new FileWriter(gestor.getCarpetaSalida().getAbsolutePath() + "/" + nombreArchivo + ".html")) {
