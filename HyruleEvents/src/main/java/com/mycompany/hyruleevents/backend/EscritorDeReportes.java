@@ -21,7 +21,7 @@ public class EscritorDeReportes {
         this.gestor = gestor;
     }
 
-    public void escribirCertificado(String nombreReporte, String nombre, String tipo, String titulo, String ubicacion, String fecha) {
+    public void escribirCertificado(String nombreReporte, String nombre, String tipo, String titulo, String ubicacion, String fecha,String correo) {
         String html = String.format(
                 "<html>\n"
                 + "<head><meta charset='UTF-8'><title>Constancia</title></head>\n"
@@ -29,6 +29,7 @@ public class EscritorDeReportes {
                 + "  <div style='border:1px solid #ccc; padding:20px; max-width:600px;'>\n"
                 + "    <h2>Constancia de Participación</h2>\n"
                 + "    <p><b>Nombre del participante:</b> %s</p>\n"
+                + "    <p><b>Correo :</b> %s</p>\n"
                 + "    <p><b>Tipo de participante:</b> %s</p>\n"
                 + "    <p><b>Título del evento:</b> %s</p>\n"
                 + "    <p><b>Ubicación:</b> %s</p>\n"
@@ -36,7 +37,7 @@ public class EscritorDeReportes {
                 + "  </div>\n"
                 + "</body>\n"
                 + "</html>",
-                nombre, tipo, titulo, ubicacion, fecha
+                nombre,correo, tipo, titulo, ubicacion, fecha
         );
 
         escribirArchivo(html, nombreReporte);
